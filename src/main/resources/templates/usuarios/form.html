@@ -13,37 +13,37 @@
 <body>
     <div layout:fragment="contenido" class="container-fluid">
         <h2 th:text="${titulo}"></h2>
-        <div class="form">
+        <div class="form" sec:authorize="${hasRole('ADMIN') or hasRole('USER')}">
             <div class="tab-content">
                 <div id="signup">
                     <form th:action="@{/usuarios/guardar}" method="post" th:object="${usuario}">
-                        <div class="card-body">
+                        <div class="card-body shadow p-3 mb-5 bg-body rounded">
                             <div class="form">
                                 <label for="name" class="form-label">Nombre</label>
                                 <input id="name" type="text" class="form-control" th:field="*{nombre}"
                                     th:errorClass="'form-control alert-warning'" />
                                 <small class="form-label text-danger" th:errors="*{nombre}"></small>
                             </div>
-
                             <div class="form">
                                 <label for="cla" class="form-label">Contraseña</label>
-                                <input id="cla" type="text" class="form-control" th:field="*{clave}"
+                                <input id="cla" type="password" class="form-control" th:field="*{clave}"
                                     th:errorClass="'form-control alert-warning'" />
                                 <small class="form-label text-danger" th:errors="*{clave}"></small>
                             </div>
                             <div class="form">
-                                <label for="correo" class="form-label">Email</label>
-                                <input id="correo" type="email" class="form-control" min="0" th:field="*{email}"
-                                    th:errorClass="'form-control alert-warning'" />
-                                <small class="form-label text-danger" th:errors="*{email}"></small>
-                            </div>
-
-                            <div class="form">
-                                <label for="rol" class="form-label">Permiso</label>
-                                <select name="rol" id="rol" class="form-select">
-                                    <option th:each="p : ${permisos}" th:value="${p.id}" th:text="${p}"></option>
+                                <label for="permiso" class="form-label">Permiso</label>
+                                <select name="permiso" id="permiso" class="form-select">
+                                    <option th:each="p : ${permisos}" th:value="${p.id}" th:text="${p.nombre}"></option>
                                 </select>
                             </div>
+                            <div class="form">
+                                <label for="sucursalAsignada" class="form-label">Sucursal Asignada</label>
+                                <select name="sucursalAsignada" id="sucursalAsignada" class="form-select">
+                                    <option th:each="s : ${sucursales}" th:value="${s.id}" th:text="${s.nombre}">
+                                    </option>
+                                </select>
+                            </div>
+
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-outline-primary float-end ms-2">
@@ -54,14 +54,9 @@
                             </a>
                         </div>
                     </form>
-
                 </div>
-
-
             </div>
-
-            <script th:fragment="js"></script>
-
+        </div>
 </body>
 
 </html>

@@ -2,8 +2,6 @@ package com.analistas.nexus.model.entities;
 
 import java.math.BigDecimal;
 
-import org.springframework.format.annotation.NumberFormat;
-import org.springframework.format.annotation.NumberFormat.Style;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +24,7 @@ public class LineaVenta {
     @Min(value = 1)
     private int cantidad;
 
-    @NumberFormat(pattern = "#,##0.00", style = Style.CURRENCY)
+    // @NumberFormat(pattern = "#,##0.00", style = Style.CURRENCY)
     private BigDecimal precioActual;
 
     @OneToOne(fetch = FetchType.LAZY)

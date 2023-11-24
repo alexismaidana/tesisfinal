@@ -9,6 +9,10 @@ import org.springframework.data.repository.query.Param;
 import com.analistas.nexus.model.entities.Producto;
 
 public interface IProductoRepository extends JpaRepository<Producto, Long>{
+
+    List<Producto> findByProveedorId(Long proveedorId);
+
+    List<Producto> findByCodigoBarras(String codigoBarras);
     
     @Query("select p from Producto p Where p.codigoBarras like %:criterio% or p.descripcion like %:criterio% and p.activo = true")
     List<Producto> buscarPor(@Param("criterio") String criterio );

@@ -1,154 +1,186 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
+  <html
+    lang="es"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}"
+  >
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+      <title th:text="${titulo}"></title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${titulo}"></title>
-</head>
-
-<body>
-    <div layout:fragment="contenido" class="container-fluid" style="font-family: arial; font-size: 17px;">
-        <div class="container">
-            <form id="formCompra" th:action="@{/compras/guardar}" th:object="${compra}" method="post">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title" th:text="${titulo}"></span>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col col-5">
-                                <div class="form">
-                                    <label for="prov" class="form-label">Proveedor</label>
-                                    <select name="prov" id="prov" class="form-select">
-                                        <option th:each="p : ${proveedores}" th:value="${p.id}" th:text="${p}"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col col-3">
-                                <div class="form-group">
-                                    <small class="card-text">Total</small>
-                                    <h4 id="total" class="text-success">0.00</h4>
-                                </div>
-                            </div>
-                            <div class="col col-3">
-                                <div class="form-group">
-                                    <small class="card-text">Fecha y Hora</small>
-                                    <br />
-                                    <label th:field="*{fechaHora}"
-                                        th:text='*{#temporals.format(fechaHora, "dd/MM/yyyy HH:mm")}'></label>
-                                </div>
-                            </div>
-                            <div class="form col col-5" style="padding: 10px;">
-                                <label for="cat" class="form-label">Categorias</label>
-                                <select name="cat" id="cat" class="form-select">
-                                    <option th:each="c : ${categorias}" th:value="${c.id}" th:text="${c}"></option>
-                                </select>
-                            </div>
-                            <div class="form col col-8">
-                                <label for="name" class="form-label">
-                                    Descripción del Producto</label>
-                                <input id="name" type="text" class="form-control"
-                                    placeholder="Ingrese la descripcion del Producto" th:field="*{descripcion}"
-                                    th:errorClass="'form-control alert-warning'" />
-                                <small class="form-label text-danger" th:errors="*{descripcion}"></small>
-                            </div>
-                        </div>
-                    </div>
+    <body>
+      <div layout:fragment="contenido">
+        <form sec:authorize="${hasRole('ADMIN') or hasRole('USER')}"
+          id="formCompra"
+          th:action="@{/compras/guardar}"
+          th:object="${compra}"
+          method="post"
+        >
+          <div class="container border rounded shadow p-3 bg-light">
+            <div class="row">
+              <div class="col-1">
+                <a
+                    th:href="@{/compras/listado}"
+                    class="btn btn-secondary btn-acciones-principales"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    title="Volver"
+                >
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+              </div>
+              <div class="col text-center">
+                <h3>REGISTRO DE COMPRA</h3>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">
+                <div class="badge badge-info fs-6">
+                  # <span id="numeroCompraSpan"></span>
                 </div>
-                <hr style="padding: 10px;">
-                <div class="col" style="display: flex; margin: 10px;">
-                    <div class="form col col-4">
-                        <a th:href="@{/proveedores/nuevo2}" class="btn btn-outline-primary">
-                            Nuevo Proveedor
-                        </a>
-                    </div>
-                    <div class="form col col-4">
-                        <a th:href="@{/productos/nuevo2}" class="btn btn-outline-primary">
-                            Nuevo Producto
-                        </a>
-                    </div>
-                    <div class="form col col-4">
-                        <a th:href="@{/categorias/nuevo}" class="btn btn-outline-primary">
-                            Nueva Categoria
-                        </a>
-                    </div>
+              </div>
+              <div class="col text-end">
+                <label th:field="*{fechaHora}" class="badge badge-info fs-6">
+                  <span id="clockDate"></span> <span id="clockTime"></span>
+                </label>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col">
+                <div>
+                  <label for="notasCompra">Notas:</label>
+                  <textarea
+                    class="form-control"
+                    name=""
+                    id="notasCompra"
+                    placeholder="Información adicional, observaciones u anotaciones de la venta. (opcional)"
+                    maxlength="120"
+                    th:field="*{descripcion}"
+                  ></textarea>
                 </div>
-
-                <!--Buscador de Productos-->
-
-                <div class=" form col col-8" style="padding: 10px;">
-                    <div class="form-group">
-                        <small class="card-text">Buscador Productos</small>
-                        <input id="buscar_productos" type="search" class="form-control">
-                    </div>
+              </div>
+              <div class="col"></div>
+              <div class="col-3">
+                <div>
+                  <h4>Total</h4>
+                  <span
+                    id="total"
+                    class="badge bg-success fs-3 money"
+                    style="width: 200px"
+                    >0,00</span
+                  >
                 </div>
-                <table id="tabla_productos" class="table table-bordered table-hover table-striped mt-4 text-center">
+              </div>
+            </div>
+            <hr />
+
+            <div class="row">
+              <div class="col-">
+                <h4 class="text-uppercase">Buscador de productos</h4>
+                <div class="input-group">
+                  <input
+                    id="buscar_productos"
+                    class="form-control"
+                    type="search"
+                    placeholder="Debes ingresar al menos 3 caracteres: Busca por código, nombre o alguna característica del producto."
+                  />
+                  <button type="button" id="btnBuscar" class="btn btn-secondary btn-acciones-principales">
+                    Buscar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">
+                <div class="overflow-auto">
+                  <table
+                    id="tabla_productos"
+                    class="table table-hover table-bordered"
+                  >
                     <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Subtotal</th>
-                        </tr>
+                      <tr class="text-uppercase">
+                        <th>Codigo</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Accion</th>
+                      </tr>
                     </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-
-                <!--Tabla Auxiliar-->
-                <table class="d-none">
+                    <tbody></tbody>
+                  </table>
+                  <table class="d-none">
                     <tbody id="lineas">
-                        <tr id="fila_{ID}">
-                            <td class="d-none">
-                                <input type="hidden" value="{ID}" name="item_id[]">
-                            </td>
-                            <td>
-                                {DESCRIPCION}
-                            </td>
-                            <td>
-                                {PRECIO}
-                            </td>
-                            <td>
-                                <input type="number" value="1" min="1" name="cantidad[]" id="cantidad_{ID}"
-                                    class="form-control" style="width:100px;"
-                                    onchange="lineasUtil.calcularSubtotal({ID}, {PRECIO}, this.value)">
-                            </td>
-                            <td>
-                                <span id="subtotal_{ID}">0.00</span>
-                            </td>
-                            <td>
-                                <a href="#" class="btn btn-sm btn-danger" onclick="lineasUtil.borrar({ID})">
-                                    <i class='bx bxs-eraser bx-tada'></i>
-                                </a>
-                            </td>
-                        </tr>
+                      <tr id="fila_{ID}">
+                        <td class="d-none">
+                          <input type="hidden" value="{ID}" name="item_id[]" />
+                        </td>
+                        <th>{CODIGO}</th>
+                        <td>{DESCRIPCION}</td>
+                        <td>{PRECIO}</td>
+                        <td>
+                          <input
+                            type="number"
+                            value="1"
+                            min="1"
+                            name="cantidad[]"
+                            id="cantidad_{ID}"
+                            class="form-control"
+                            style="width: 100px"
+                            onchange="lineasUtil.calcularSubtotal({ID}, {PRECIO}, this.value)"
+                          />
+                          
+                        </td>
+                        <td>
+                          <span id="subtotal_{ID}">0,00</span>
+                        </td>
+                        <td>
+                          <button
+                            class="btn btn-danger btn-sm"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="Eliminar"
+                            onclick="lineasUtil.borrar({ID})"
+                          >
+                            <i class="bi bi-trash3"></i>
+                          </button>
+                        </td>
+                      </tr>
                     </tbody>
-
-                </table>
-
-                
-
-        </div>
-        <div class="card-footer">
-            <a href="#" onclick="$('#formCompra').submit();" class="btn btn-primary float-end">
-                Guardar
-            </a>
-        </div>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col text-center">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  onclick="$('#formCompra').submit();"
+                >
+                  <i class="bi bi-check-square-fill"></i>
+                  Guardar
+                </button>
+                <a th:href="@{/compras/listado}" type="button" class="btn btn-danger">
+                  <i class="bi bi-x-square-fill"></i>
+                  Cancelar
+                </a>
+              </div>
+            </div>
+          </div>
         </form>
-       
+      </div>
 
-    </div>
-
-    <!--Script-->
-    <script th:fragment="js" th:src="@{/js/compra.js}">
-        $('.money').mask("#.##0,00", { reverse: true });
-    </script>
-
-</body>
-
-</html>
+      <script th:fragment="js" th:src="@{/js/compraForm.js}"></script>
+    </body>
+  </html>

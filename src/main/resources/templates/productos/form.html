@@ -1,85 +1,255 @@
 <!DOCTYPE html>
-
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title th:text="${titulo}"></title>
 </head>
 
 <body>
     <div layout:fragment="contenido">
-        <div class="container-fluid my-4">
-            <div class="card-header">
-                <h5 th:text="${titulo}" class="card-title"></h5>
-            </div>
-            <form th:action="@{/productos/guardar}" method="post" th:object="${producto}">
-                <div class="card-body">
-                    <div class="form">
-                        <label for="cod-bar" class="form-label">Código de Barras</label>
-                        <input id="cod-bar" type="text" class="form-control" maxlength="13" th:field="*{codigoBarras}"
-                            th:errorClass="'form-control alert-danger'" />
+        <form th:action="@{/productos/guardar}" method="post" th:object="${producto}">
+            <div class="container border rounded shadow p-3 bg-light">
+                <div class="row">
+                    <div class="col-1">
+                        <a th:href="@{/productos/listado}" class="btn btn-secondary btn-acciones-principales"
+                            data-bs-toggle="tooltip" data-bs-placement="right" title="Volver">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
                     </div>
-                    <div class="form">
-                        <label for="descri" class="form-label">Titulo</label>
-                        <input id="titu" type="text" class="form-control" th:field="*{titulo}"
+                    <div class="col-10 text-center text-uppercase">
+                        <h3>Nuevo producto</h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-4">
+                        <label for="provee" class="form-label" style="width: 90%">Proveedor:</label>
+                        <!-- <a
+                            th:href="@{/proveedores/nuevo/}"
+                            class="link-secondary"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Agregar nuevo proveedor"
+                        >
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="currentColor"
+                            class="bi bi-plus-square-fill"
+                            viewBox="0 0 16 16"
+                            >
+                            <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"
+                            />
+                            </svg>
+                        </a> -->
+                        <select name="provee" id="provee" class="form-select">
+                            <option th:each="p : ${proveedores}" th:value="${p.id}" th:text="${p}"
+                                th:selected="${producto != null and producto.proveedor != null and p.id == producto.proveedor.id}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <label for="codigoProducto" class="form-label">Código del producto:</label>
+                        <input
+                            id="codigoProducto"
+                            type="text"
+                            class="form-control disabled"
+                            autocomplete="off"
+                            th:field="*{codigoBarras}"
+                            th:errorClass="'form-control alert-danger'"
+                            readonly="readonly"
+                        />
+                    </div>
+
+
+                    <!-- CATEGORIA -->
+                    <div class="col-4">
+                        <label for="cate" class="form-label" style="width: 90%">
+                            Categoría:
+                        </label>
+                        <!-- <button
+                            class="btn m-0 p-0"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalNuevaCategoria"
+                        >
+                            <a
+                            class="link-secondary"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Agregar nueva categoría"
+                            >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                fill="currentColor"
+                                class="bi bi-plus-square-fill"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"
+                                />
+                            </svg>
+                            </a>
+                        </button> -->
+                        <!-- <div
+                            class="modal fade"
+                            id="modalNuevaCategoria"
+                            tabindex="-1"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                        >
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title text-uppercase" id="exampleModalLabel">
+                                        Nueva categoría
+                                    </h5>
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                    ></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form
+                                            id="formModalNuevaCategoria"
+                                            th:action="@{/categorias/guardar}"
+                                            method="post"
+                                        >
+                                            <label for="nuevaCat" class="form-label"
+                                            >Nombre de la categoría:</label
+                                            >
+                                            <input id="nuevaCat" type="text" class="form-control" />
+                                            <hr/>
+                                            <div class="text-end">
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-secondary"
+                                                    data-bs-dismiss="modal"
+                                                >
+                                                    Cerrar
+                                                </button>
+                                                <button
+                                                    id="btnGuardarCategoria"
+                                                    class="btn btn-primary"
+                                                    type="submit"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <select name="cate" id="cate" class="form-select">
+                            <option th:each="c : ${categorias}" th:value="${c.id}" th:text="${c}"
+                                th:selected="${producto != null and producto.categoria != null and c.id == producto.categoria.id}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <label for="titulo" class="form-label">Titulo:</label>
+                        <input id="nombreComun" type="text" class="form-control" maxlength="30" data-bs-toggle="tooltip"
+                            data-bs-placement="bottom" title="Máximo 30 carácteres"
+                            placeholder="Nombre que utilice para identificar el producto." th:field="*{titulo}"
                             th:errorClass="'form-control alert-warning'" />
                         <small class="form-label text-danger" th:errors="*{titulo}"></small>
                     </div>
-                    <div class="form">
-                        <label for="descri" class="form-label">Descripción</label>
-                        <input id="descri" type="text" class="form-control" th:field="*{descripcion}"
-                            th:errorClass="'form-control alert-warning'" />
+                    <div class="col">
+                        <label for="url-img" class="form-label">Link de la Imagen</label>
+                        <input id="url-img" type="text" class="form-control" placeholder="ingrese el link de imagen del producto."  th:field="*{linkimagen}">
+                    </div>
+
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <label for="nombreProd" class="form-label">Descripción:</label>
+                        <input id="nombreProd" type="text" class="form-control" maxlength="50" data-bs-toggle="tooltip"
+                            data-bs-placement="bottom" title="Máximo 50 carácteres"
+                            placeholder="Cualquier información adicional que sea de utilidad para la identificación y búsqueda del producto."
+                            th:field="*{descripcion}" th:errorClass="'form-control alert-warning'" />
                         <small class="form-label text-danger" th:errors="*{descripcion}"></small>
                     </div>
-                    <div class="form">
-                        <label for="pre" class="form-label">Precio</label>
-                        <input id="pre" type="text" class="form-control money2" th:field="*{precio}"
-                            th:errorClass="'form-control alert-warning'" />
-                        <small class="form-label text-danger" th:errors="*{precio}"></small>
-                    </div>
-                    <div class="form">
-                        <label for="sto" class="form-label">Stock</label>
-                        <input id="sto" type="number" class="form-control" min="0" th:field="*{stock}"
-                            th:errorClass="'form-control alert-warning'" />
-                        <small class="form-label text-danger" th:errors="*{stock}"></small>
-                    </div>
-                    <div class="form">
-                        <label for="url-img" class="form-label">Link de la Imagen</label>
-                        <input id="url-img" type="text" class="form-control" th:field="*{linkimagen}">
-                    </div>
-                    <div class="form">
-                        <label for="cat" class="form-label">Categorias</label>
-                        <select name="cat" id="cat" class="form-select">
-                            <option th:each="c : ${categorias}" th:value="${c.id}" th:text="${c}"></option>
-                        </select>
-                    </div>
-                    <div class="form">
-                        <label for="pro" class="form-label">Proveedor</label>
-                        <select name="pro" id="pro" class="form-select">
-                            <option th:each="p : ${proveedores}" th:value="${p.id}" th:text="${p}"></option>
-                        </select>
+                    <div class="col-2">
+                        <label for="pre" class="form-label">Precio de compra:</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-currency-dollar"></i>
+                            </span>
+                            <input id="pre" type="number" class="form-control" required th:field="*{precioCompra}"
+                                th:errorClass="'form-control alert-warning'" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="Ingresar sólo números sin puntos ni comas" />
+                            <small class="form-label text-danger" th:errors="*{precioCompra}"></small>
+                        </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-outline-primary float-end ms-2">
-                        Guardar
-                    </button>
-                    <a href="/productos/listado" class="btn btn-outline-secondary float-end">
-                        Cancelar
-                    </a>
+                <br>
+                <div class="row">
+                    <div class="col-4">
+                        <label for="pre" class="form-label">Precio de venta:</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-currency-dollar"></i>
+                            </span>
+                            <input id="pre" type="number" class="form-control" required th:field="*{precio}"
+                                th:errorClass="'form-control alert-warning'" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="Ingresar sólo números sin puntos ni comas" />
+                            <small class="form-label text-danger" th:errors="*{precio}"></small>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <label for="stockSucursalUno" class="form-label">Stock Sucursal Fontana:</label>
+                        <input id="stockSucursalUno" type="number" class="form-control" min="0"
+                            th:field="*{stockSucursalUno}" th:errorClass="'form-control alert-warning'" />
+                        <small class="form-label text-danger" th:errors="*{stockSucursalUno}"></small>
+                    </div>
+                    <div class="col-4">
+                        <label for="stockSucursalDos" class="form-label">Stock Sucursal Resistencia:</label>
+                        <input id="stockSucursalDos" type="number" class="form-control" min="0"
+                            th:field="*{stockSucursalDos}" th:errorClass="'form-control alert-warning'" />
+                        <small class="form-label text-danger" th:errors="*{stockSucursalDos}"></small>
+                    </div>
                 </div>
-            </form>
-        </div>
+                <br><br>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check-square-fill"></i>
+                            Guardar
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="bi bi-stars"></i>
+                            Limpiar
+                        </button>
+                        <a th:href="@{/productos/listado}" type="button" class="btn btn-danger">
+                            <i class="bi bi-x-square-fill"></i>
+                            Cancelar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
-    <script th:fragment="js" th:src="@{/js/producto.js}">
-        $('.money2').mask("#.##0,00", { reverse: true });
-    </script>
 
+
+
+    <script layout:fragment="js" th:src="@{/js/productoForm.js}"></script>
 </body>
 
 </html>

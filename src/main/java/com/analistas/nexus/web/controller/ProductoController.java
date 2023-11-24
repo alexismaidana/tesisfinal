@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -63,8 +64,8 @@ public class ProductoController {
     }
 
     @PostMapping("/guardar")
-    public String guardar(@Valid Producto producto, BindingResult result, @RequestParam("cat") Long idCat,
-            @RequestParam("pro") Long idPro,
+    public String guardar(@Valid Producto producto, BindingResult result, @RequestParam("cate") Long idCate,
+            @RequestParam("provee") Long idProvee,
             Model model, RedirectAttributes msgFlash, SessionStatus status) {
 
         // Verificar si hay errores
@@ -73,8 +74,8 @@ public class ProductoController {
             return "productos/form";
         }
 
-        producto.setCategoria(categoriaService.buscarPorId(idCat));
-        producto.setProveedor(proveedorService.buscarPorId(idPro));
+        producto.setCategoria(categoriaService.buscarPorId(idCate));
+        producto.setProveedor(proveedorService.buscarPorId(idProvee));
         productoService.guardar(producto);
 
         msgFlash.addFlashAttribute("success", "Producto Guardado Correctamente.");
@@ -115,33 +116,54 @@ public class ProductoController {
         return proveedorService.buscarTodo();
     }
 
-    @GetMapping("/nuevo2")
-    public String nuevo2(Model model) {
+    // @GetMapping("/nuevo2")
+    // public String nuevo2(Model model) {
 
-        model.addAttribute("titulo", "Nuevo Producto");
-        model.addAttribute("producto", new Producto());
-        model.addAttribute("categorias", categoriaService.buscarTodo());
+    //     model.addAttribute("titulo", "Nuevo Producto");
+    //     model.addAttribute("producto", new Producto());
+    //     model.addAttribute("categorias", categoriaService.buscarTodo());
 
-        return "productos/form2";
-    }
+    //     return "productos/form2";
+    // }
 
-    @PostMapping("/guardar2")
-    public String guardar2(@Valid Producto producto, BindingResult result, @RequestParam("cat") Long idCat,
-            Model model, RedirectAttributes msgFlash, SessionStatus status) {
+    // @PostMapping("/guardar2")
+    // public String guardar2(@Valid Producto producto, BindingResult result, @RequestParam("cat") Long idCat,
+    //         Model model, RedirectAttributes msgFlash, SessionStatus status) {
 
-        // Verificar si hay errores
-        if (result.hasErrors()) {
-            model.addAttribute("danger", "Corrija los Errores...");
-            return "productos/form2";
+    //     // Verificar si hay errores
+    //     if (result.hasErrors()) {
+    //         model.addAttribute("danger", "Corrija los Errores...");
+    //         return "productos/form2";
+    //     }
+
+    //     producto.setCategoria(categoriaService.buscarPorId(idCat));
+    //     productoService.guardar(producto);
+
+    //     msgFlash.addFlashAttribute("success", "Producto Guardado Correctamente.");
+    //     status.setComplete();
+
+    //     return "redirect:/compras/nuevo";
+    // }
+
+    @GetMapping("/generarCodigo")
+    @ResponseBody
+    public String generarCodigo() {
+        // Consulta la base de datos para obtener el último número utilizado
+        String ultimoCodigo = productoService.obtenerUltimoCodigo();
+
+        // Si no hay ningún código previo, comienza desde 1, de lo contrario, incrementa el número
+        int numeroIncremental = 1;
+        if (ultimoCodigo != null && ultimoCodigo.matches("NEXUS(\\d+)")) {
+            numeroIncremental = Integer.parseInt(ultimoCodigo.substring(5)) + 1;
         }
 
-        producto.setCategoria(categoriaService.buscarPorId(idCat));
-        productoService.guardar(producto);
+        // Formatea el número con ceros a la izquierda según su longitud
+        String numeroFormateado = String.format("%03d", numeroIncremental); // "%03d" asegura que siempre haya al menos 3 dígitos
 
-        msgFlash.addFlashAttribute("success", "Producto Guardado Correctamente.");
-        status.setComplete();
+        // Genera el nuevo código sin el guion "-"
+        String nuevoCodigo = "NEXUS" + numeroFormateado;
 
-        return "redirect:/compras/nuevo";
+        return nuevoCodigo;
     }
 
 }

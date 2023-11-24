@@ -36,6 +36,12 @@
                         <small class="form-label text-danger" th:errors="*{precio}"></small>
                     </div>
                     <div class="form">
+                        <label for="prec" class="form-label">Precio de Compra</label>
+                        <input id="prec" type="text" class="form-control money2" th:field="*{precioCompra}"
+                            th:errorClass="'form-control alert-warning'" />
+                        <small class="form-label text-danger" th:errors="*{precioCompra}"></small>
+                    </div>
+                    <div class="form">
                         <label for="sto" class="form-label">Stock</label>
                         <input id="sto" type="number" class="form-control" min="0" th:field="*{stock}"
                             th:errorClass="'form-control alert-warning'" />

@@ -6,12 +6,15 @@ import com.analistas.nexus.model.entities.Producto;
 
 public interface IProductoService {
     
-    public List<Producto> buscarTodo();
+  public List<Producto> buscarTodo();
 
     public List<Producto> buscarPor(String criterio);
 
     public Producto buscarPorId(Long id);
 
-    public void guardar (Producto producto);
+    public void guardar (Producto producto); 
     
+    public Producto buscarPorCodigoBarras(String codigoBarras);
+
+    public String obtenerUltimoCodigo();
 }

@@ -24,7 +24,7 @@ a {
 
 #sidebar-content {
     position: fixed;
-    width: 200px;
+    width: 250px;
     z-index: 15;
 }
 
@@ -36,13 +36,13 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    height: 80px;
+    height: 100px;
 }
 
 /* RESPONSIVE IMAGE SLIDER */
 .img-brands-slider{
     margin: 0 5rem;
-    width: 100px;
+    width: 90px;
 }
 @media (max-width: 1240px) {
     .img-brands-slider{

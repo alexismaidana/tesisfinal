@@ -26,12 +26,19 @@
 
     <div layout:fragment="contenido">
 
-        <div class="justify-conten-center align-items-center mt-5 m-4">
+        <div class="justify-conten-center align-items-center mt-4 m-4">
 
             <div class="overflow-auto">
                 <h4 th:text="${titulo}" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                  color: rgb(59, 63, 59); font-size: 30px;" class="text-center"></h4>
-                <table class="table table-dark table-hover border border-1 caption-top" id="tablaProductos">
+                <div class="my-2 float-end" >
+                    <a th:href="@{/productos/nuevo}" class="btn btn-secondary btn-acciones-principales"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar producto">
+                        <i class="bi bi-plus-circle fs-5"></i>
+                    </a>
+                </div>
+
+                <table class="table table-hover border border-1 caption-top shadow p-3 mb-5 bg-white rounded" id="tablaProductos">
 
                     <thead>
                         <tr>
@@ -40,7 +47,9 @@
                             <th>Cod. Barras</th>
                             <th>Descripción</th>
                             <th>Precio</th>
-                            <th>Stock</th>
+                            <th>Stock Fontana</th>
+                            <th>Stock Resistencia</th>
+                            <th>Stock General</th>
                             <th>Editar-Borrar</th>
                         </tr>
                     </thead>
@@ -53,7 +62,9 @@
                             <td th:text="${p.CodigoBarras}"></td>
                             <td th:text="${p.descripcion}"></td>
                             <td th:text="${p.precio}"></td>
-                            <td th:text="${p.stock}"></td>
+                            <td th:text="${p.stockSucursalUno}"></td>
+                            <td th:text="${p.stockSucursalDos}"></td>
+                            <td th:text="${p.stockGeneral}"></td>
                             <td style="max-width: 40px;">
                                 <a th:href="@{/productos/editar/} + ${p.id}" class="btn btn-sm btn-warning"
                                     title="Editar">
@@ -68,15 +79,11 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="card-footer">
-                    <a th:href="@{/productos/nuevo}" class="btn btn-outline-primary float-end">
-                        Nuevo Producto
-                    </a>
-                </div>
+
             </div>
         </div>
     </div>
-    </div>
+  
 
     <script th:fragment="js" th:src="@{/js/producto.js}"></script>
 </body>

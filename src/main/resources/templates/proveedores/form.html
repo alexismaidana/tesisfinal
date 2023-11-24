@@ -15,7 +15,7 @@
             <h5 th:text="${titulo}" class="card-title"></h5>
         </div>
 
-        <form th:action="@{/proveedores/guardar}" method="post" th:object="${proveedor}" id="form-proveedores">
+        <form sec:authorize="${hasRole('ADMIN') or hasRole('USER')}" th:action="@{/proveedores/guardar}" method="post" th:object="${proveedor}" id="form-proveedores">
             <div class="card-body">
                 <div class="form">
                     <label for="raz" class="form-label">RAZON SOCIAL</label>

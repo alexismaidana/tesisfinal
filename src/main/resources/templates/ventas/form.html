@@ -1,130 +1,141 @@
 <!DOCTYPE html>
-
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${titulo}"></title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title th:text="${titulo}"></title>
 </head>
 
 <body>
-    <div layout:fragment="contenido" class="container-fluid">
-        <form id="formVenta" th:action="@{/ventas/guardar}" th:object="${venta}" method="post">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title" th:text="${titulo}"></span>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col col-12">
-                            <div class="form-group float-end"
-                                style="font-family: 'Arial Narrow,'; font-size: 25px; color: blue;">
-                                <small class="card-text">Usuario: </small>
-                                <span sec:authentication="name"></span>
-                            </div>
-                            <div class="col col-6">
-                                <div class="form-group"  style="font-family: 'Arial Narrow,'; font-size: 25px; color: blue;">
-                                    <!--small class="card-text">Numero de Factura:</small-->
-                                    <br />
-                                    <label th:field="*{nroFactura}"></label>
-                                        
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-3">
-                            <div class="form-group">
-                                <small class="card-text">Fecha y Hora</small>
-                                <br />
-                                <label th:field="*{fechaHora}"
-                                    th:text='*{#temporals.format(fechaHora, "dd/MM/yyyy HH:mm")}'></label>
-                            </div>
-                        </div>
-                        <div class="col col-4">
-                            <div class="form-group">
-                                <small class="card-tetx">Descripción</small>
-                                <textarea class="form-control" rows="3" th:field="*{descripcion}"></textarea>
-                            </div>
-                        </div>
-                        <div class="col col-3">
-                            <div class="form-group">
-                                <small class="card-text">Total</small>
-                                <h4 id="total" class="text-success money">0.00</h4>
-                            </div>
-                        </div>
-
-                    </div>
-                    <hr class="my-5" />
-                    <!--Linea de Venta (DETALLES)-->
-                    <!--Buscador de Productos-->
-                    <div class="row">
-                        <div class="col col-12">
-                            <div class="form-group">
-                                <small class="card-text">Buscador Productos</small>
-                                <input id="buscar_productos" type="search" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <table id="tabla_productos" class="table table-bordered table-hover table-striped mt-4 text-center">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th class="money">Precio</th>
-                                <th>Cantidad</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-
-                    <!--Tabla Auxiliar-->
-                    <table class="d-none">
-                        <tbody id="lineas">
-                            <tr id="fila_{ID}">
-                                <td class="d-none">
-                                    <input type="hidden" value="{ID}" name="item_id[]">
-                                </td>
-                                <td>
-                                    {DESCRIPCION}
-                                </td>
-                                <td>
-                                    {PRECIO}
-                                </td>
-                                <td>
-                                    <input type="number" value="1" min="1" name="cantidad[]" id="cantidad_{ID}"
-                                        class="form-control" style="width:100px;"
-                                        onchange="lineasUtil.calcularSubtotal({ID}, {PRECIO}, this.value)">
-                                </td>
-                                <td>
-                                    <span id="subtotal_{ID}">0.00</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-danger" onclick="lineasUtil.borrar({ID})">
-                                        <i class='bx bxs-eraser bx-tada'></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-
-                    </table>
-                </div>
-                <div class="card-footer">
-                    <a href="#" onclick="$('#formVenta').submit();" class="btn btn-primary float-end">
-                        Guardar
-                    </a>
-                </div>
+  <div layout:fragment="contenido">
+    <form sec:authorize="${hasRole('ADMIN') or hasRole('USER') or hasRole('EMPLEADO')}" id="formVenta"
+      th:action="@{/ventas/guardar}" th:object="${venta}" method="post">
+      <div class="container border rounded shadow p-3 bg-light">
+        <div class="row">
+          <div class="col-1">
+            <a th:href="@{/ventas/listado}" class="btn btn-secondary btn-acciones-principales" data-bs-toggle="tooltip"
+              data-bs-placement="right" title="Volver">
+              <i class="bi bi-chevron-left"></i>
+            </a>
+          </div>
+          <div class="col text-center">
+            <h3>REGISTRO DE VENTA</h3>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <div class="badge badge-info fs-6">
+              # <span id="numeroVenta"></span>
+       
             </div>
-        </form>
-    </div>
-    <!--Script-->
-    <script th:fragment="js" th:src="@{/js/venta.js}">
-        $('.money').mask("#.##0,00", { reverse: true });
-    </script>
+          </div>
+          <div class="col text-end">
+            <label th:field="*{fechaHora}" class="badge badge-info fs-6">
+              <span id="clockDate"></span> <span id="clockTime"></span>
+            
+            </label>
+          </div>
+        </div>
+       
+        <br />
+        <div class="row">
+          <div class="col">
+            <div>
+              <label for="notasVenta">Notas:</label>
+              <textarea class="form-control" name="" id="notasVenta"
+                placeholder="Información adicional, observaciones u anotaciones de la venta. (opcional)" maxlength="120"
+                th:field="*{descripcion}"></textarea>
+            </div>
+          </div>
+          <div class="col"></div>
+          <div class="col-3">
+            <div>
+              <h4>Total</h4>
+              <span id="total" class="badge bg-success fs-3" style="width: 200px">$0,00</span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-">
+            <h4>Buscador de productos</h4>
+            <div class="input-group">
+              <input id="buscar_productos" class="form-control" type="search"
+                placeholder="Debes ingresar al menos 3 caracteres: Busca por código, nombre o alguna característica del producto." />
+              <button type="button" id="btnBuscar" class="btn btn-secondary btn-acciones-principales">
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <div class="overflow-auto">
+              <table id="tabla_productos" class="table table-hover table-bordered">
+                <thead>
+                  <tr class="text-uppercase">
+                    <th>Codigo</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <table class="d-none" style="height: 25vh;">
+                <tbody id="lineas">
+                  <tr id="fila_{ID}">
+                    <td class="d-none">
+                      <input type="hidden" value="{ID}" name="item_id[]" />
+                    </td>
+                    <td>{CODIGO}</td>
+                    <td>{DESCRIPCION}</td>
+                    <td>{PRECIO}</td>
+                    <td>
+                      <input type="number" value="1" min="1" name="cantidad[]" id="cantidad_{ID}" class="form-control"
+                        style="width: 100px" onchange="lineasUtil.calcularSubtotal({ID}, {PRECIO}, this.value)" />
+                    </td>
+                    <td>
+                      <span id="subtotal_{ID}">0.00</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="Eliminar" onclick="lineasUtil.borrar({ID})">
+                        <i class="bi bi-trash3"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col text-center">
+            <button type="submit" class="btn btn-success" onclick="$('#formVenta').submit();">
+              <i class="bi bi-check-square-fill"></i>
+              Guardar
+            </button>
+            <a th:href="@{/inventario}" type="button" class="btn btn-danger">
+              <i class="bi bi-x-square-fill"></i>
+              Cancelar
+            </a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 
+  <script th:fragment="js" th:src="@{/js/ventaForm.js}"></script>
 </body>
 
 </html>

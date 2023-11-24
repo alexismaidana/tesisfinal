@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -24,18 +25,15 @@ public class Cliente {
     private Long id;
 
     @Size(max = 30, min = 5)
-    //@NotEmpty(message = "El nombre de ususario es requerido...")
-    @Pattern(regexp = "[a-zA-ZÀ-ÖØ-öø-ÿ]+\\.?(( |\\-)[a-zA-ZÀ-ÖØ-öø-ÿ]+\\.?)*", message="Escribe nuevamente tu nombre")
+    @NotEmpty(message = "El nombre de ususario es requerido...")   
     private String nombre;
 
     @Size(max = 30, min = 5)
-    //@NotEmpty(message = "El nombre de ususario es requerido...")
-    @Pattern(regexp = "[a-zA-ZÀ-ÖØ-öø-ÿ]+\\.?(( |\\-)[a-zA-ZÀ-ÖØ-öø-ÿ]+\\.?)*", message="Escribe nuevamente tu apellido")
+    @NotEmpty(message = "El nombre de ususario es requerido...")    
     private String apellido;
     
     @Size(max = 30, min = 5)
-    //@NotEmpty(message = "El nombre de ususario es requerido...")
-    @Pattern(regexp = "[a-zA-ZÀ-ÖØ-öø-ÿ]+\\.?(( |\\-)[a-zA-ZÀ-ÖØ-öø-ÿ]+\\.?)*", message="Escribe nuevamente tu direccion")
+    @NotEmpty(message = "El nombre de ususario es requerido...")   
     private String direccion;
     
     @NotBlank(message = "El DNI es obligatorio.")

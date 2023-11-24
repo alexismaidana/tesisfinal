@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.analistas.nexus.model.entities.Venta;
 
+
+
+
 public interface IVentaService {
     
     public List<Venta> buscarTodo();
@@ -11,4 +14,9 @@ public interface IVentaService {
     public Venta buscarPorId(Long id);
     
     public void guardar(Venta venta);
+
+    Long obtenerUltimoIdVenta();
+
+    public Object buscarSoloHabilitados();
+    
 }

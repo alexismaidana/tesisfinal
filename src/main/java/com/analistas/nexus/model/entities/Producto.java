@@ -18,12 +18,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "productos")
 public class Producto {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,7 +33,7 @@ public class Producto {
     private String codigoBarras;
 
     @Size(max = 50)
-    //@NotBlank(message = "El titulo es requerido.")
+    // @NotBlank(message = "El titulo es requerido.")
     private String titulo;
 
     @Size(max = 500)
@@ -43,11 +44,24 @@ public class Producto {
     @NumberFormat(pattern = "#,##0.00", style = Style.CURRENCY)
     private BigDecimal precio;
 
-    @NotNull(message = "Ingrese la cantidad de Stock")
-    private int stock;
+    @NotNull(message = "El precio es requerido.")
+    @Positive(message = "El precio debe ser un valor positivo.")
+    @Column(name="precio_compra")
+    private BigDecimal precioCompra;
+
 
     @Column(name = "lnk_img", length = 500)
     private String linkimagen;
+
+    @NotNull(message = "Ingrese la cantidad de Stock")
+    private int stockSucursalUno;
+
+    @NotNull(message = "Ingrese la cantidad de Stock")
+    private int stockSucursalDos;
+
+
+    private int stockGeneral;
+
 
     @Column(name = "activo", columnDefinition = "boolean default 1")
     private boolean activo;
@@ -89,7 +103,6 @@ public class Producto {
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
     }
-  
 
     public String getDescripcion() {
         return descripcion;
@@ -107,13 +120,6 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
 
     public String getLinkimagen() {
         return linkimagen;
@@ -141,7 +147,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return  id + " - " + descripcion + " - " + precio;
+        return id + " - " + descripcion + " - " + precio;
     }
 
     public String getCodigoBarras() {
@@ -152,6 +158,51 @@ public class Producto {
         this.codigoBarras = codigoBarras;
     }
 
+    public BigDecimal getPrecioCompra() {
+        return precioCompra;
+    }
+
+    public void setPrecioCompra(BigDecimal precioCompra) {
+        this.precioCompra = precioCompra;
+    }
+
+    public int getStockSucursalUno() {
+        return stockSucursalUno;
+    }
+
+    public int getStockSucursalDos() {
+        return stockSucursalDos;
+    }
+
+    public int getStockGeneral() {
+        return stockGeneral;
+    }
+
+    public void setStockGeneral(int stockGeneral) {
+        this.stockGeneral = stockGeneral;
+    }
+
+    // Método personalizado para actualizar stockSucursalUno
+    public void setStockSucursalUno(int stockSucursalUno) {
+        this.stockSucursalUno = stockSucursalUno;
+        actualizarStockGeneral();
+    }
+
+    // Método personalizado para actualizar stockSucursalDos
+    public void setStockSucursalDos(int stockSucursalDos) {
+        this.stockSucursalDos = stockSucursalDos;
+        actualizarStockGeneral();
+    }
+
+    // Método privado para actualizar stockGeneral
+    private void actualizarStockGeneral() {
+        this.stockGeneral = stockSucursalUno + stockSucursalDos;
+    }
+
+    public String getNombreCompleto() {
+        return this.titulo+ " " + " " + this.descripcion;
+    }
+
     
-    
+
 }

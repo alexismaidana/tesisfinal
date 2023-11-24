@@ -46,6 +46,10 @@ public class Compra {
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
     private Proveedor proveedor;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private Usuario usuario;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", referencedColumnName = "id")
@@ -142,5 +146,14 @@ public class Compra {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
 
 }

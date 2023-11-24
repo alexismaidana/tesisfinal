@@ -20,13 +20,13 @@
 
 <body>
 
-    <div layout:fragment="contenido" class="container fluid">
+    <div layout:fragment="contenido" class="container fluid mt-4">
 
-        <div class="justify-conten-center align-items-center mt-5 m-4">
+        <div class="justify-conten-center align-items-center ">
             <div class="overflow-auto">
                 <h4 th:text="${titulo}" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                  color: rgb(59, 63, 59); font-size: 30px;" class="text-center"></h4>
-                <table class="table table-hover border border-1 caption-top table-dark" id="tablaProveedores">
+                <table class="table table-hover border border-1 caption-top shadow p-3 mb-5 bg-white rounded" id="tablaProveedores">
                     <thead>
                         <!--button id="btnExportar" class="btn btn-success" title="Exportar datos a Excel">
                             <i class="fas fa-file-excel"></i>
@@ -38,7 +38,7 @@
                             <th>Email</th>
                             <th>Localidad</th>
                             <th>Telefono</th>
-                            <th>Editar-Borrar</th>
+                            <th sec:authorize="${hasRole('ADMIN') or hasRole('USER')}">Editar-Borrar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,11 +50,11 @@
                             <td th:text="${p.localidad}">10</td>
                             <td th:text="${p.telefono}">25000</td>
                             <td style="max-width: 40px;">
-                                <a th:href="@{/proveedores/editar/} + ${p.id}" class="btn btn-sm btn-warning"
+                                <a sec:authorize="${hasRole('ADMIN') or hasRole('USER')}" th:href="@{/proveedores/editar/} + ${p.id}" class="btn btn-sm btn-warning"
                                     title="Editar">
                                     <i class="bx bxs-edit bx-spin"></i>
                                 </a>
-                                <a th:href="@{/proveedores/borrar/} + ${p.id}" class="btn btn-sm btn-danger"
+                                <a sec:authorize="${hasRole('ADMIN') or hasRole('USER')}" th:href="@{/proveedores/borrar/} + ${p.id}" class="btn btn-sm btn-danger"
                                     title="Borrar"
                                     onclick="return confirm('¿Estás seguro de deshabilitar el Registro?')">
                                     <i class="bx bx-trash bx-spin"></i>
@@ -63,7 +63,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="card-footer">
+                <div class="card-footer" sec:authorize="${hasRole('ADMIN') or hasRole('USER')}">
                     <a th:href="@{/proveedores/nuevo}" class="btn btn-primary my-5 mx-5 float-end"> Nuevo Proveedor</a>
                 </div>
             </div>

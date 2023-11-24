@@ -4,8 +4,11 @@ import java.util.List;
 
 import com.analistas.nexus.model.entities.Compra;
 
+
+
 public interface ICompraService {
 
+   
     public List<Compra> buscarTodo();
 
     public Compra buscarPorId(Long id);
@@ -13,5 +16,7 @@ public interface ICompraService {
     public List<Compra> buscarPor(String criterio);
     
     public void guardar(Compra compra);
+
+    public Long obtenerUltimoIdCompra();
     
 }

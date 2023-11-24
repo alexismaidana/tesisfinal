@@ -24,7 +24,7 @@ public class CategoriaServiceImpl implements ICategoriaService{
 
     @Override
     public List<Categoria> buscarPor(String criterio) {
-        // TODO Auto-generated method stub
+       
         return null;
     }
 
