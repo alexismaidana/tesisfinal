@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- bootstrap links -->
+
+    <!-- bootstrap links -->
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <!-- fonts links -->
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div layout:fragment="contenido">
+
+
+        <div class="content"> <br>
+
+            <h1 th:text="${titulo}" class="card-title text-center"></h1>
+
+            <p class="text-center">TU CONEXIÒN CON LA TECNOLOGIA!!!
+            </p>
+
+        </div>
+
+
+        <div class="container" id="contact" style="font-family:arial narrow ;">
+            <div class="row" style="margin-top: 50px;">
+                <div class="col-md-4 py-3 py-md-0">
+                    <div class="card-title">
+                        <i class="fas fa-phone"></i>
+                        <p> Telefono</p>
+                        <h6>362-4 883252</h6>
+                    </div>
+                </div>
+                <div class="col-md-4 py-3 py-md-0">
+                    <div class="card-title">
+                        <i class="fas fa-envelope"> </i>
+                        <p>Email</p>
+                        <h6>nexusinformatica@gmail.com</h6>
+                    </div>
+                </div>
+                <div class="col-md-4 py-3 py-md-0">
+                    <div class="card-title">
+                        <i class="fas fa-location-dot"></i>
+                        <p> Dirección</p>
+                        <h6>Calle Guemes 145</h6>
+                    </div>
+                </div>
+            </div>
+
+            <form action="https://formsubmit.co/cmarangoni8@gmail.com" method="post">
+
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-4 py-3 py-md-0">
+                        <input type="text" name="name" class="form-control form-control" placeholder="Name">
+                    </div>
+                    <div class="col-md-4 py-3 py-md-0">
+                        <input type="text" name="email" class="form-control form-control" placeholder="Email">
+                    </div>
+                    <div class="col-md-4 py-3 py-md-0">
+                        <input type="text" name="phone" class="form-control form-control" placeholder="Phone">
+                    </div>
+                    <div class="form-group" style="margin-top: 30px;">
+                        <textarea class="form-control" name="comments" rows="5" placeholder="Message"></textarea>
+                    </div>
+                    <hr>
+                    <button class="w-50 btn btn-lg btn-dark float-end" type="submit">Enviar</button>
+
+                </div>
+                <input type="hidden" name="_next" value="http://localhost:8081/contacto">
+                <input type="hidden" name="_captcha" value="false">
+            </form>
+        </div>
+        <hr>
+                 <!-- footer -->
+     <footer id=" footer" style="background-color:rgb(159, 236, 186);color:rgb(23, 22, 22);padding:20px;
+     color:DodgerBlue; font-family:arial narrow ;">
+         <div class="footer-top">
+             <div class="container">
+                 <div class="row">
+
+                     <div class="col-lg-3 col-md-6 footer-contact">
+                         <h3>Nexus Informatica</h3>
+
+                         <strong>Phone:</strong> +543624883252 <br>
+                         <strong>Email:</strong> nexusinformatica@chaco.com <br>
+                     </div>
+
+                     <div class="col-lg-3 col-md-6 footer-links">
+                         <ul>
+                             <h3>Accesos</h3>
+                             <li><a th:href="@{/conocenos}">Conocenos</a></li>
+                             <li><a th:href="@{/home}">Productos</a></li>
+                             <li><a th:href="@{/contacto}">Contactanos</a></li>
+
+                         </ul>
+                     </div>
+
+                     <div class="col-lg-3 col-md-6 footer-links">
+                         <h4>Visitanos</h4>
+                         <p>Todos los dias, todo el tiempo, las mejores publicaciones y las mejores ofertas,
+                             VISITANOS!!!.</p>
+
+                         <div class="socail-links mt-3">
+                             
+                             <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                             <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                             
+                         </div>
+
+                     </div>
+
+                 </div>
+             </div>
+         </div>
+         <hr>
+         <div class="container py-4">
+             <div class="copyright">
+                 &copy; Copyright <strong><span>Nexus Informatica</span></strong> Tu Conexión con la
+                 Tecnología
+             </div>
+             <div class="credits">
+                 Designed by <a href="#">Nexus - Estudios</a>
+             </div>
+             
+         </div>
+     </footer>
+     <!-- footer -->
+    </div>
+
+
+    <script th:fragment="js"></script>
+</body>
+
+</html>

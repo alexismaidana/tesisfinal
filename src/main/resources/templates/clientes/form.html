@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+    <div layout:fragment="contenido" style="background-color: rgb(238, 237, 236);" class="container-fluid">
+        <hr>
+        <h2 th:text="${titulo}" class="text-center" style="font-family: arial narrow bold"></h2>
+
+        <img class="text-center w3-animate-fading" th:src="@{/img/logocliente.png}"
+            style="width:100%; height: 200px; margin: auto;">
+
+        <div class="container pt-5" style="display:block;">
+
+            <div class="form container" style=" height: 500px; width: 100%; ">
+                <div class="tab-content">
+                    <div id="signup">
+                        <form th:action="@{/clientes/guardar}" method="post" th:object="${cliente}">
+                            <div class="card-body">
+                                <div class="form">
+                                    <label for="name" class="form-label">Nombre</label>
+                                    <input id="name" type="text" class="form-control" th:field="*{nombre}"
+                                        th:errorClass="'form-control alert-warning'" />
+                                    <small class="form-label text-danger" th:errors="*{nombre}"></small>
+                                </div>
+                                <div class="form">
+                                    <label for="ape" class="form-label">Apellido</label>
+                                    <input id="ape" type="text" class="form-control" th:field="*{apellido}"
+                                        th:errorClass="'form-control alert-warning'" />
+                                    <small class="form-label text-danger" th:errors="*{apellido}"></small>
+                                </div>
+                                <div class="form">
+                                    <label for="dir" class="form-label">Dirección</label>
+                                    <input id="dir" type="text" class="form-control" th:field="*{direccion}"
+                                        th:errorClass="'form-control alert-warning'" />
+                                    <small class="form-label text-danger" th:errors="*{direccion}"></small>
+                                </div>
+
+                                <div class="form">
+                                    <label for="cla" class="form-label">DNI</label>
+                                    <input id="cla" type="text" class="form-control" th:field="*{dni}"
+                                        th:errorClass="'form-control alert-warning'" />
+                                    <small class="form-label text-danger" th:errors="*{dni}"></small>
+                                </div>
+                                <div class="form">
+                                    <label for="correo" class="form-label">Email</label>
+                                    <input id="correo" type="email" class="form-control" min="0" th:field="*{email}"
+                                        th:errorClass="'form-control alert-warning'" />
+                                    <small class="form-label text-danger" th:errors="*{email}"></small>
+                                </div>
+                                
+
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-outline-primary btn-dark float-end ms-2">
+                                    Guardar
+                                </button>
+                                <a href="/home" class="btn btn-outline-secondary btn-dark float-end">
+                                    Cancelar
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script th:fragment="js"></script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+</head>
+
+<body>
+    <div layout:fragment="contenido" >
+
+        <div class="justify-conten-center align-items-center mt-5 m-4">
+            <div class="overflow-auto">
+                <h4 th:text="${titulo}" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                color: rgb(59, 63, 59); font-size: 30px;" class="text-center"></h4>
+                <table class="table table-dark table-hover border border-1 caption-top" id="tablaVenta">
+                    <thead>
+                        
+                        <tr>
+                            <th>#</th>
+                            <th>fecha y Hora</th>
+                            <th>Descripción</th>
+                            <th>Usuario</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                            <th>Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="v : ${ventas}">
+                            <td th:text="${v.id}">1</td>
+                            <td th:text='*{#temporals.format(v.fechaHora, "dd/MM/yyyy HH:mm")}'>2</td>
+                            <td th:text="${v.descripcion}">2</td>
+                            <td th:text="${v.Usuario}">2</td>
+                            <td th:text="${v.calcularCantidad}">2</td>
+                            <td th:text="${v.calcularTotal}" class="money">2</td>
+                            <td style="max-width: 40px;">
+                                <a th:href="@{/ventas/borrar/} + ${v.id}" class="btn btn-sm btn-danger" title="Borrar"
+                                    onclick="return confirm('¿Estás seguro de deshabilitar el Registro?')">
+                                    <i class="bx bx-trash bx-spin"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="card-footer">
+                    <a th:href="@{/ventas/nuevo}" class="btn btn-primary my-5 mx-5 float-end">Nueva Venta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:fragment="js" th:src="@{/js/venta.js}">
+        $('.money').mask("#.##0,00", { reverse: true });
+
+    </script>
+
+
+
+</body>
+
+</html>

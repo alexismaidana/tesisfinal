@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- bootstrap links -->
+
+    <!-- bootstrap links -->
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <!-- fonts links -->
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div layout:fragment="contenido">
+
+
+        <div class="content"> <br>
+
+            <h1 th:text="${titulo}" class="card-title text-center"></h1>
+
+            <p class="text-center">TU CONEXIÒN CON LA TECNOLOGIA!!!
+            </p>
+
+        </div>
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Sobre nosotros</h1>
+                <p class="lead">Aquí encontrará toda la información que necesite.</p>
+            </div>
+        </div>
+        <div class="container">
+            <h3>Autores</h3>
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://sm.ign.com/t/ign_latam/screenshot/default/vegeta-anos-tiene_rgb2.1200.jpg"
+                            class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Alan A. Zanazzo Marangoni</h5>
+                            <p class="card-text">Estudiante de ingeniería en sistemas en UTN Facultad Regional
+                                Resistencia, técnico en computación y amante de la tecnología.</p>
+                            <a href="https://www.facebook.com/alan.zanazzo"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://static.t13.cl/images/original/2019/05/1557689182-goku.jpg"
+                            class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Claudio G. Marangoni</h5>
+                            <p class="card-text">Estudiante de analista de sistemas en Instituto Nueva,
+                                personal del Servicio Penitenciario Provincial (Chaco), apasionado por el
+                                fútbol.</p>
+                            <a href="https://www.facebook.com/profile.php?id=100009517389410"><i
+                                    class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div ALIGN="justify" style="font-family: arial narrow; margin: 15px; font-size: 18px;">
+            <p> INFORMACIÓN DE LA EMPRESA.</p>
+            <br>
+            <p>
+                Es un emprendimiento enfocado en la búsqueda constante de soluciones de calidad, sean bienes y
+                servicios, con y para el consumidor.
+                Orientado en la prestación de servicios como punto de venta en la comercialización de artículos de
+                tecnología de la
+                información aplicada a diferentes rubros, asesoramiento personalizado y soporte técnico centrado en
+                instalación,
+                mantenimiento y reparación de computadoras, impresoras y redes informáticas.
+            </p>
+            <p>
+                Siempre buscando el mejor beneficio y satisfacción de manera equitativa entre las partes (prestador y
+                consumidor).
+                En un principio, esta idea nace de la experiencia propia como consumidor, en cuya conclusión, debido a
+                que la
+                satisfacción que aportan los servicios técnicos por lo general no se acerca a buen trabajo. Por lo
+                tanto,
+                esto impulso a que buscáramos por cuenta propia la manera de satisfacer las necesidades de los
+                consumidores
+                llevando así la exigencia de nuestro trabajo a lo más alto.
+
+            </p>
+            <p>
+
+
+                Lo anterior fue la chispa, mucho antes, la base de todo fue el goce por lo innovador y la tecnología que
+                sentó
+                los pilares para comenzar a emprender de manera autónoma e independiente.
+                El equipo que conforman la pequeña empresa y que poco a poco produce sus resultados positivos.
+                Un reducido y efectivo equipo, integrado por el propietario y ejecutivo principal de la empresa,
+                encargado de gran parte de la operativa, gestión y toma de decisiones, el gerente de ventas encargado
+                principal de la atención al cliente y community manager cuya responsabilidad recae, sobre todo, en las
+                redes sociales.
+                Por el momento, la empresa cuenta con asiento virtual donde se pueden acceder a nuestros servicios tanto
+                como para compras de
+                accesorios para pc periféricos hardware, como así también al servicio técnico.
+            </p>
+
+        </div>
+
+        <hr>
+        <!-- footer -->
+        <footer id=" footer" style="background-color:rgb(159, 236, 186);color:rgb(23, 22, 22);padding:20px;
+     color:DodgerBlue; font-family:arial narrow ;">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-6 footer-contact">
+                            <h3>Nexus Informatica</h3>
+
+                            <strong>Phone:</strong> +543624883252 <br>
+                            <strong>Email:</strong> nexusinformatica@chaco.com <br>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <ul>
+                                <h3>Accesos</h3>
+                                <li><a th:href="@{/conocenos}">Conocenos</a></li>
+                                <li><a th:href="@{/home}">Productos</a></li>
+                                <li><a th:href="@{/contacto}">Contactanos</a></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Visitanos</h4>
+                            <p>Todos los dias, todo el tiempo, las mejores publicaciones y las mejores ofertas,
+                                VISITANOS!!!.</p>
+
+                            <div class="socail-links mt-3">
+                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container py-4">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Nexus Informatica</span></strong> Tu Conexión con la
+                    Tecnología
+                </div>
+                <div class="credits">
+                    Designed by <a href="#">Nexus - Estudios</a>
+                </div>
+
+            </div>
+        </footer>
+        <!-- footer -->
+
+    </div>
+
+
+    <script th:fragment="js"></script>
+</body>
+
+</html>

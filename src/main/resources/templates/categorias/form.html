@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+    <div layout:fragment="contenido" style="background-color: rgb(238, 237, 236);" class="container-fluid">
+        <hr>
+        <h2 th:text="${titulo}" class="text-center" style="font-family: arial narrow bold"></h2>
+
+        <div class="form container" style=" height: 500px; width: 100%; ">
+            <div class="tab-content">
+                <div id="signup">
+                    <form th:action="@{/categorias/guardar}" method="post" th:object="${categoria}">
+                        <div class="card-body">
+                            <div class="form col col-5">
+                                <label for="name" class="form-label">Ingrese la nueva Categoria</label>
+                                <input id="name" type="text" class="form-control" th:field="*{nombre}"
+                                    th:errorClass="'form-control alert-warning'" />
+                                <small class="form-label text-danger" th:errors="*{nombre}"></small>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-outline-primary btn-dark float-end ms-2">
+                                Guardar
+                            </button>
+                            <a href="/compras/nuevo" class="btn btn-outline-secondary btn-dark float-end">
+                                Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:fragment="js"></script>
+</body>
+
+</html>

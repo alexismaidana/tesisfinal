@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <META http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+</head>
+
+<body>
+
+    <div layout:fragment="contenido" class="container fluid">
+
+        <div class="card my-4">
+            <div class="card-header">
+                <h4 th:text="${titulo}" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                 color: rgb(59, 63, 59); font-size: 30px;" class="text-center"></h4>
+            </div>
+            <div class="card-body">
+                <table id="tablaClientes"
+                    class="table table-striped display table-hover table-bordered table-dark table-sm">
+                    <thead class="text-center">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Editar-Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr th:each="c : ${categorias}">
+                            <td th:text="${c.id}">1</td>
+                            <td th:text="${c.nombre}">1</td>
+                            <td style="max-width
+                            : 40px;">
+                                <a th:href="@{/categorias/editar/} + ${c.id}" class="btn btn-sm btn-warning"
+                                    title="Editar">
+                                    <i class="bx bxs-edit bx-spin"></i>
+                                </a>
+                                <a th:href="@{/categorias/borrar/} + ${c.id}" class="btn btn-sm btn-danger" title="Borrar"
+                                    onclick="return confirm('¿Estás seguro de deshabilitar el Registro?')">
+                                    <i class="bx bx-trash bx-spin"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a th:href="@{/categorias/nuevo}" class="btn btn-primary my-5 mx-5 float-end"> Nuevo cliente</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script th:fragment="js"></script>
+
+</body>
+
+</html>

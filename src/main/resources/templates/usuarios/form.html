@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+</head>
+
+<body>
+    <div layout:fragment="contenido" class="container-fluid">
+        <h2 th:text="${titulo}"></h2>
+        <div class="form">
+            <div class="tab-content">
+                <div id="signup">
+                    <form th:action="@{/usuarios/guardar}" method="post" th:object="${usuario}">
+                        <div class="card-body">
+                            <div class="form">
+                                <label for="name" class="form-label">Nombre</label>
+                                <input id="name" type="text" class="form-control" th:field="*{nombre}"
+                                    th:errorClass="'form-control alert-warning'" />
+                                <small class="form-label text-danger" th:errors="*{nombre}"></small>
+                            </div>
+
+                            <div class="form">
+                                <label for="cla" class="form-label">Contraseña</label>
+                                <input id="cla" type="text" class="form-control" th:field="*{clave}"
+                                    th:errorClass="'form-control alert-warning'" />
+                                <small class="form-label text-danger" th:errors="*{clave}"></small>
+                            </div>
+                            <div class="form">
+                                <label for="correo" class="form-label">Email</label>
+                                <input id="correo" type="email" class="form-control" min="0" th:field="*{email}"
+                                    th:errorClass="'form-control alert-warning'" />
+                                <small class="form-label text-danger" th:errors="*{email}"></small>
+                            </div>
+
+                            <div class="form">
+                                <label for="rol" class="form-label">Permiso</label>
+                                <select name="rol" id="rol" class="form-select">
+                                    <option th:each="p : ${permisos}" th:value="${p.id}" th:text="${p}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-outline-primary float-end ms-2">
+                                Guardar
+                            </button>
+                            <a href="/usuarios/listado" class="btn btn-outline-secondary float-end">
+                                Cancelar
+                            </a>
+                        </div>
+                    </form>
+
+                </div>
+
+
+            </div>
+
+            <script th:fragment="js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <META http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/style.css">
+    <title th:text="${titulo}"></title>
+    <!--font awesome con CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!-- links para exportar a excel -->
+    <script src="https://unpkg.com/xlsx@0.16.9/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/file-saverjs@latest/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/tableexport@latest/dist/js/tableexport.min.js"></script>
+
+</head>
+
+<body>
+
+    <div layout:fragment="contenido" class="container fluid">
+
+        <div class="justify-conten-center align-items-center mt-5 m-4">
+            <div class="overflow-auto">
+                <h4 th:text="${titulo}" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                 color: rgb(59, 63, 59); font-size: 30px;" class="text-center"></h4>
+                <table class="table table-hover border border-1 caption-top table-dark" id="tablaProveedores">
+                    <thead>
+                        <!--button id="btnExportar" class="btn btn-success" title="Exportar datos a Excel">
+                            <i class="fas fa-file-excel"></i>
+                        </button-->
+                        <tr>
+                            <th>#</th>
+                            <th>Razon Social</th>
+                            <th>Dirección</th>
+                            <th>Email</th>
+                            <th>Localidad</th>
+                            <th>Telefono</th>
+                            <th>Editar-Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="p : ${proveedores}">
+                            <td th:text="${p.id}">1</td>
+                            <td th:text="${p.razon_soc}">RyR Informatica S.A</td>
+                            <td th:text="${p.direccion}">Santiago del Estero 850</td>
+                            <td th:text="${p.email}">Procesador I3 11323-U</td>
+                            <td th:text="${p.localidad}">10</td>
+                            <td th:text="${p.telefono}">25000</td>
+                            <td style="max-width: 40px;">
+                                <a th:href="@{/proveedores/editar/} + ${p.id}" class="btn btn-sm btn-warning"
+                                    title="Editar">
+                                    <i class="bx bxs-edit bx-spin"></i>
+                                </a>
+                                <a th:href="@{/proveedores/borrar/} + ${p.id}" class="btn btn-sm btn-danger"
+                                    title="Borrar"
+                                    onclick="return confirm('¿Estás seguro de deshabilitar el Registro?')">
+                                    <i class="bx bx-trash bx-spin"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="card-footer">
+                    <a th:href="@{/proveedores/nuevo}" class="btn btn-primary my-5 mx-5 float-end"> Nuevo Proveedor</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:fragment="js" th:src="@{/js/proveedor.js}"></script>
+
+</body>
+
+</html>

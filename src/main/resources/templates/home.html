@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${titulo}"></title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+</head>
+
+<body>
+    <div layout:fragment="contenido">
+        <!-- BANNER PRINCIPAL -->
+        <div id="banner" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#banner" data-bs-slide-to="0" class="active" aria-current="true"
+                    aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#banner" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#banner" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner mt-2">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <img th:src="@{/img/home/slider1.png}" class="d-block w-100">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img th:src="@{/img/home/slider2.png}" class="d-block w-100">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img th:src="@{/img/home/slider3.png}" class="d-block w-100" alt="slider3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#banner" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true" title="Anterior"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#banner" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" title="Siguiente"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+
+        <hr class="mt-1">
+
+        <!-- BRANDS SLIDER -->
+        <div class="brands-slider">
+            <div id="brands-slider" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="4000">
+                        <img th:src="@{/img/brands/intel.png}" class="img-brands-slider" alt="logo-intel">
+                        <img th:src="@{/img/brands/nvidia.png}" class="img-brands-slider" alt="logo-nvidia">
+                        <img th:src="@{/img/brands/amd.png}" class="img-brands-slider" alt="logo-amd">
+                        <img th:src="@{/img/brands/razer.png}" class="img-brands-slider" alt="logo-razer">
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <img th:src="@{/img/brands/gigabyte.png}" class="img-brands-slider" alt="logo-gigabyte">
+                        <img th:src="@{/img/brands/asus.png}" class="img-brands-slider" alt="logo-asus">
+                        <img th:src="@{/img/brands/msi.png}" class="img-brands-slider" alt="logo-msi">
+                        <img th:src="@{/img/brands/genius.png}" class="img-brands-slider" alt="logo-genius">
+                    </div>
+
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <img th:src="@{/img/brands/hyperx.png}" class="img-brands-slider" alt="logo-hyperx">
+                        <img th:src="@{/img/brands/asrock.png}" class="img-brands-slider" alt="logo-asrock">
+                        <img th:src="@{/img/brands/logitech.png}" class="img-brands-slider" alt="logo-logitech">
+                        <img th:src="@{/img/brands/kingston.png}" class="img-brands-slider" alt="logo-kingston">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
+                <div th:each="p : ${productos}" class="col">
+                    <div class="card shadow">
+                        <!-- <a href="#"> -->
+                        <div class="card-img-container">
+                            <img th:src="@{${p.linkimagen}}" class="card-img-top" alt="...">
+                        </div>
+                        <!-- </a> -->
+                        <div class="card-body">
+                            <hr>
+                            <!-- <a href=""> -->
+                            <div class="card-title">
+                                <h5 th:text="${p.descripcion}"></h5>
+                            </div>
+                            <!-- </a> -->
+                            <div class="card-price">
+                                <i class="bi bi-currency-dollar"></i>
+                                <span th:text="${p.precio}"></span>
+                            </div>
+                            <div class="card-btn">
+                                <a th:href="@{/detalleProducto}" class="btn btn-success text-center stretched-link">
+                                    <i class="bi bi-eye"></i>
+                                    Ver más
+                                </a>
+                                <a href="#" class="btn btn-primary text-center">
+                                    <i class="bi bi-cart-check"></i>
+                                    Agregar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+    </div>
+    </div>
+
+
+
+    <!--bootstrap 5.0.2 JS CDN-->
+    <script th:fragment="js"></script>
+</body>
+
+</html>

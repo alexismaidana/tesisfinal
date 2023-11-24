@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://getbootstrap.com/getbootstrap.com/docs/5.0/examples/sign-in/">
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    
+    <!-- Booststrap 5.0.2 CSS CDN-->
+    <link   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+
+    <!-- Favicons -->
+    <!-- <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/apple-touch-icon.png"
+        sizes="180x180">
+    <link rel="icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32"
+        type="image/png">
+    <link rel="icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16"
+        type="image/png">
+    <link rel="manifest" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/safari-pinned-tab.svg"
+        color="#7952b3">
+    <link rel="icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3"> -->
+    
+    
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="login d-flex align-items-center justify-content-center">
+        <form th:action="@{/login}" method="post" class="rounded-3 p-3 p-sm-4 bg-dark bg-gradient">
+            <div class="d-flex justify-content-end">
+                <a th:href="@{/home}" type="button" class="btn-close btn-close-white" aria-label="Close"></a>
+            </div>
+            <!-- Mensajes -->
+            <p th:if="${param.error}" class="text-danger text-center">Usuario o Contraseña incorrectos</p>
+            <p th:if="${param.logout}" class="text-info text-center">Sesión cerrada</p>
+
+            <!-- Ingreso de datos -->
+            <div class="mb-3">
+                <label for="userNickName" class="form-label text-light">Nombre de usuario</label>
+                <input 
+                    type="text"
+                    name="username"
+                    class="form-control" 
+                    id="userNickName" 
+                    aria-describedby="dataSecuriry"
+                    placeholder="Tu usuario aquí"
+                >
+                <div id="dataSecuriry" class="form-text text-light">Todos tus datos están protegidos.</div>
+            </div>
+            <div class="mb-3">
+                <label for="userPassword" class="form-label text-light">Contraseña</label>
+                <input 
+                    type="password"
+                    name="password" 
+                    class="form-control" 
+                    id="userPassword" 
+                    placeholder="Tu contraseña"
+                >
+            </div>
+            
+            <div class="d-flex justify-content-around">
+                <button type="submit" class="btn btn-success">Ingresar</button>
+                <a th:href="@{/clientes/nuevo}" type="button" class="btn btn-primary">Registrarme</a>
+            </div>
+        </form>  
+    </div>
+</body>
+
+</html>

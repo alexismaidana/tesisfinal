@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <META http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+    <!--font awesome con CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!-- links para exportar a excel -->
+    <script src="https://unpkg.com/xlsx@0.16.9/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/file-saverjs@latest/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/tableexport@latest/dist/js/tableexport.min.js"></script>
+</head>
+
+<body>
+
+    <div layout:fragment="contenido" >
+        <div class="justify-conten-center align-items-center mt-5 m-4">
+            <div class="overflow-auto">
+                <h4 th:text="${titulo}" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                 color: rgb(59, 63, 59); font-size: 30px;" class="text-center"></h4>
+                <table class="table table-dark table-hover border border-1 caption-top" id="tablaClientes">
+
+                    <thead>
+                        <!--button id="btnExportar" class="btn btn-success" title="Exportar datos a Excel">
+                            <i class="fas fa-file-excel"></i>
+                        </button-->
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Dirección</th>
+                            <th>Email</th>
+                            <th>Editar-Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="c : ${clientes}">
+                            <td th:text="${c.id}">1</td>
+                            <td th:text="${c.nombre}">1</td>
+                            <td th:text="${c.apellido}">1</td>
+                            <td th:text="${c.direccion}">Claudio</td>
+                            <td th:text="${c.email}">1</td>
+                            <td style="max-width
+                        : 40px;">
+                                <a th:href="@{/clientes/editar/} + ${c.id}" class="btn btn-sm btn-warning"
+                                    title="Editar">
+                                    <i class="bx bxs-edit bx-spin"></i>
+                                </a>
+                                <a th:href="@{/clientes/borrar/} + ${c.id}" class="btn btn-sm btn-danger" title="Borrar"
+                                    onclick="return confirm('¿Estás seguro de deshabilitar el Registro?')">
+                                    <i class="bx bx-trash bx-spin"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="card-footer">
+                    <a th:href="@{/clientes/nuevo}" class="btn btn-primary my-5 mx-5 float-end"> Nuevo cliente</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:fragment="js" th:src="@{/js/cliente.js}"></script>
+
+</body>
+
+</html>

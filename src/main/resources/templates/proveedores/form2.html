@@ -1,0 +1,79 @@
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <META http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device, initial-scale=1.0">
+
+    <title th:text="${titulo}"></title>
+
+<body>
+    <div layout:fragment="contenido" class="container fluid">
+
+        <div class="card-header">
+            <h5 th:text="${titulo}" class="card-title"></h5>
+        </div>
+
+        <form th:action="@{/proveedores/guardar2}" method="post" th:object="${proveedor}" id="form-proveedores">
+            <div class="card-body">
+                <div class="form">
+                    <label for="raz" class="form-label">RAZON SOCIAL</label>
+                    <input id="raz" type="text" class="form-control" th:field="*{razon_soc}"
+                        th:errorClass="'form-control alert-warning'" />
+                    <small class="form-label text-danger" th:errors="*{razon_soc}"></small>
+                </div>
+                <div class="form">
+                    <label for="dir" class="form-label">DIRECCION</label>
+                    <input id="dir" type="text" class="form-control" th:field="*{direccion}"
+                        th:errorClass="'form-control alert-warning'" />
+                    <small class="form-label text-danger" th:errors="*{direccion}"></small>
+
+                </div>
+                <div class="form">
+                    <label for="correo" class="form-label">EMAIL</label>
+                    <input id="correo" type="email" class="form-control" th:field="*{email}"
+                        th:errorClass="'form-control alert-warning'" />
+                    <small class="form-label text-danger" th:errors="*{email}"></small>
+
+                    <div class="form">
+                        <label for="cuit" class="form-label">CUIL</label>
+                        <input id="cuit" type="text" class="form-control" th:field="*{cuil}"
+                            th:errorClass="'form-control alert-warning'" />
+                        <small class="form-label text-danger" th:errors="*{cuil}"></small>
+
+                    </div>
+                    <div class="form">
+                        <label for="loc" class="form-label">LOCALIDAD</label>
+                        <input id="loc" type="text" class="form-control" th:field="*{localidad}"
+                            th:errorClass="'form-control alert-warning'" />
+                        <small class="form-label text-danger" th:errors="*{localidad}"></small>
+                    </div>
+                    <div class="form">
+                        <label for="num" class="form-label">TELEFONO</label>
+                        <input id="num" type="text" class="form-control" th:field="*{telefono}"
+                            th:errorClass="'form-control alert-warning'" />
+                        <small class="form-label text-danger" th:errors="*{telefono}"></small>
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-outline-primary float-end ms-2">
+                        Guardar
+                    </button>
+                    <a href="/compras/nuevo" class="btn btn-outline-secondary float-end">
+                        Cancelar
+                    </a>
+                </div>
+        </form>
+    </div>
+    
+    
+
+
+    <script th:fragment="js">
+
+    </script>
+</body>
+
+</html>
