@@ -99,7 +99,8 @@
                                 <span th:text="${p.precio}"></span>
                             </div>
                             <div class="card-btn">
-                                <a th:href="@{/detalleProducto}" class="btn btn-success text-center stretched-link">
+                                <a th:href="@{/detalleProducto/{id} (id=${p.id}) }"
+                                    class="btn btn-success text-center stretched-link">
                                     <i class="bi bi-eye"></i>
                                     Ver más
                                 </a>

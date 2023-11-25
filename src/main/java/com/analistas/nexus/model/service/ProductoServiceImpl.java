@@ -1,6 +1,7 @@
 package com.analistas.nexus.model.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,5 +79,8 @@ public class ProductoServiceImpl implements IProductoService {
         return "NEXUS-1"; // Por ejemplo, si no hay productos, se devuelve "PAISA-1"
     }    
    
-
+    @Override
+    public Optional<Producto> get(Long id) {
+        return productoRepo.findById(id);
+    }
 }

@@ -29,6 +29,7 @@ public class Venta {
     private Long id;
 
     private int nroFactura;
+    private double total;
 
     @NotNull(message = "La fecha es requerida")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm z")
@@ -134,4 +135,12 @@ public class Venta {
     public void addLinea(LineaVenta linea) {
         lineas.add(linea);
     }
+
+    public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
 }

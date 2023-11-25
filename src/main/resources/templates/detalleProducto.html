@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" 
-    xmlns:th="http://thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-    layout:decorate="~{layout/layout}">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -17,40 +15,40 @@
 </head>
 
 <body>
-    <div layout:fragment="contenido" >
+    <div layout:fragment="contenido">
 
         <!-- MODAL MEDIOS Y FORMAS DE PAGO -->
-        
+
         <div class="modal fade" id="mediosDePago" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-            <div class="modal-content p-2">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Medios de pago</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <h6>Mercado Pago</h6>
-                        <img th:src="@{/img/pagos/medios-de-pago.png}" class="w-100" alt="Mercado pago">
+                <div class="modal-content p-2">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Medios de pago</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <hr>
-                    <h6>Otros</h6>
-                    <div class="text-center">
-                        <div class="d-inline-block m-1">
-                            <p>Transferencia/Depósito</p>
-                            <img th:src="@{/img/pagos/transferencia.png}" class="img-pago" alt="Transferencia">
+                    <div class="modal-body">
+                        <div>
+                            <h6>Mercado Pago</h6>
+                            <img th:src="@{/img/pagos/medios-de-pago.png}" class="w-100" alt="Mercado pago">
                         </div>
-                        <div class="d-inline-block m-1">
-                            <p>Efectivo</p>
-                            <img th:src="@{/img/pagos/efectivo.png}" class="img-pago" alt="Efectivo">
+                        <hr>
+                        <h6>Otros</h6>
+                        <div class="text-center">
+                            <div class="d-inline-block m-1">
+                                <p>Transferencia/Depósito</p>
+                                <img th:src="@{/img/pagos/transferencia.png}" class="img-pago" alt="Transferencia">
+                            </div>
+                            <div class="d-inline-block m-1">
+                                <p>Efectivo</p>
+                                <img th:src="@{/img/pagos/efectivo.png}" class="img-pago" alt="Efectivo">
+                            </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Listo</button>
+                        <!-- <button type="button" class="btn btn-primary">Listo</button> -->
+                    </div>
                 </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Listo</button>
-                <!-- <button type="button" class="btn btn-primary">Listo</button> -->
-                </div>
-            </div>
             </div>
         </div>
 
@@ -58,54 +56,63 @@
 
             <!-- IMAGENES PRODUCTO -->
             <div class="row">
-                <div class="col-7">
-                    <div id="carouselExampleIndicators" class="carousel carousel-dark slide justify-content-center" data-bs-ride="carousel">
+                <div class="col-6">
+                    <center><img class="img-fluid rounded" th:src="@{${producto.linkimagen}}"></center>
+                    <!--<div id="carouselExampleIndicators" class="carousel carousel-dark slide justify-content-center"
+                        data-bs-ride="carousel">
                         <div class="carousel-indicators mb-1">
-                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
-                            <img th:src="@{/img/productos/i5-12400-1.png}" class="d-block w-100" alt="...">
-                          </button>
-                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2">
-                            <img th:src="@{/img/productos/i5-12400.png}" class="d-block w-100" alt="...">
-                          </button>
-                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3">
-                            <img th:src="@{/img/productos/i5-12400-2.png}" class="d-block w-100" alt="...">
-                          </button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1">
+                                <img th:src="@{/img/productos/i5-12400-1.png}" class="d-block w-100" alt="...">
+                            </button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2">
+                                <img th:src="@{/img/productos/i5-12400.png}" class="d-block w-100" alt="...">
+                            </button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3">
+                                <img th:src="@{/img/productos/i5-12400-2.png}" class="d-block w-100" alt="...">
+                            </button>
                         </div>
                         <div class="carousel-inner">
-                          <div class="carousel-item active p-4 img-container">
-                            <img th:src="@{/img/productos/i5-12400-1.png}" class="d-block " alt="...">
-                          </div>
-                          <div class="carousel-item p-4 img-container">
-                            <img th:src="@{/img/productos/i5-12400.png}" class="d-block " alt="...">
-                          </div>
-                          <div class="carousel-item p-4 img-container">
-                            <img th:src="@{/img/productos/i5-12400-2.png}" class="d-block " alt="...">
-                          </div>
+                            <div class="carousel-item active p-4 img-container">
+                                <img th:src="@{/img/productos/i5-12400-1.png}" class="d-block " alt="...">
+                            </div>
+                            <div class="carousel-item p-4 img-container">
+                                <img th:src="@{/img/productos/i5-12400.png}" class="d-block " alt="...">
+                            </div>
+                            <div class="carousel-item p-4 img-container">
+                                <img th:src="@{/img/productos/i5-12400-2.png}" class="d-block " alt="...">
+                            </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Previous</span>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Next</span>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
                         </button>
-                    </div>
+                    </div>-->
                 </div>
 
                 <!-- DATOS PRINCIPALES -->
                 <div class="col-5 datos-producto">
                     <h3>
-                        PROCESADOR SOCKET 1700 INTEL CORE I5 12400 4.4GHZ 6N 12H
+                        <!--PROCESADOR SOCKET 1700 INTEL CORE I5 12400 4.4GHZ 6N 12H-->
+                        <class="card-title" th:text="${producto.descripcion}"></class>
                     </h3>
                     <hr>
                     <div class="text-success fw-bold">
-                        <i class="bi bi-check-circle-fill"></i> 
+                        <i class="bi bi-check-circle-fill"></i>
                         <span>Disponible</span>
                     </div>
                     <div class="precio-producto">
-                        <span>$140.999,00</span>
+                        <span th:text=" 'Precio: $'+ ${producto.precio} "></span>
                     </div>
+
                     <div class="text-success fw-bold">
                         <i class="bi bi-rocket-takeoff-fill"></i>
                         <span>Envío gratis</span>
@@ -116,7 +123,29 @@
                         </a>
                     </div>
                     <hr>
-                    <div>
+                    
+                    <div class="col-lg-6">
+                        <form th:action="@{/carrito}" method="POST">
+                            <input type="hidden" th:value="${producto.id}" name="id">
+
+                            <ul class="list-group">
+                                <!--<li class="list-group-item">
+                                    <h5 th:text=" 'Precio: $'+ ${producto.precio} "></h5>
+                                </li>-->
+                                <li class="list-group-item">
+                                    <h6>
+                                        Cantidad: <input type="number" id="cant" name="cant" autocomplete="off" min="1"
+                                            max="10" value="1">
+                                    </h6>
+                                </li>
+                            </ul>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-cart-check"></i>
+                                Añadir al carrito</button>
+
+                        </form>
+                        <!--<div>
                         Carecterísticas:
                         <ul>
                             <li>12va Generación</li>
@@ -125,14 +154,14 @@
                             <li>18MB de memoria cache</li>
                             <li>Gráficos UHD Intel 730</li>
                         </ul>
+                        </div>-->
                     </div>
-                </div>            
-            </div>
-            <hr>
+                </div>
+                <hr>
 
 
-            <!-- DESCRIPCION PRODUCTO -->
-            <div class="row">
+                <!-- DESCRIPCION PRODUCTO -->
+                <!--<div class="row">
                 <h3 class="text-center">
                     DESCRIPCION
                 </h3>
@@ -142,14 +171,15 @@
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum impedit similique ea iure voluptatum ratione modi illum fugit cum provident! Consequuntur asperiores similique cum accusantium possimus debitis maxime quis iure!
                 </p>
+            </div>-->
             </div>
         </div>
+
     </div>
 
 
-
-        <!--bootstrap 5.0.2 JS CDN-->
-        <script th:fragment="js"></script>
+    <!--bootstrap 5.0.2 JS CDN-->
+    <script th:fragment="js"></script>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 package com.analistas.nexus.model.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.analistas.nexus.model.entities.Producto;
 
@@ -17,4 +18,7 @@ public interface IProductoService {
     public Producto buscarPorCodigoBarras(String codigoBarras);
 
     public String obtenerUltimoCodigo();
+
+    public Optional<Producto> get(Long id);
+
 }

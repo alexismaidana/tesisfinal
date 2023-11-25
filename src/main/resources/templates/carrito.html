@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${titulo}"></title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+</head>
+
+<body>
+    <div layout:fragment="contenido">
+
+        <!-- Page Content -->
+        <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3">
+                Carrito de<small> Compras</small>
+            </h1>
+
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Principal</a></li>
+                <li class="breadcrumb-item active">Carrito</li>
+            </ol>
+
+            <!-- Blog Post -->
+            <div class="card mb-2">
+                <div class="card-body">
+                    <div class="row">
+                        <!--<div class="col-lg-9">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Producto</th>
+                                        <th scope="col">Precio Unidad</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="LineaVenta:${carrito}">
+                                        <td th:text="${LineaVenta.producto.descripcion}"></td>
+                                        <td th:text=" '$'+${LineaVenta.precioActual} "></td>
+                                        <td th:text="${LineaVenta.cantidad}"></td>
+                                        <td th:text=" '$'+${LineaVenta.calcularSubtotal}"></td>
+                                        <td><a th:href="@{/delete/carrito/{id}   (id=${LineaVenta.producto.id}) }"
+                                                class="btn btn-danger">Quitar</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul class="list-group">
+                                <a th:href="@{/home}" class="btn btn-success">Agregar Productos</a>
+                            </ul>
+                        </div>-->
+
+                        <div class="row mt-2">
+
+                            <div class="fw-bold fs-3 text-end">
+                                SubTotal:
+                                <span th:text="'$ '+ ${venta.total}" class="badge bg-success money"></span>
+                            </div>
+                        </div>
+
+                        <!-- NUEVA TABLA -->
+                        <div class="row mt-2">
+                            <div class="col">
+                                <h5 class="text-secondary">Items</h5>
+                                <div class="table-container detalleVenta overflow-auto border rounded">
+                                    <table class="table table-hover caption-top">
+                                        <thead class="bg-light">
+                                            <tr class="text-uppercase">
+                                                <th scope="col">Producto</th>
+                                                <th scope="col">Precio Unit.</th>
+                                                <th scope="col">Cantidad</th>
+                                                <th scope="col">Total</th>
+                                                <th scope="col">Accion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="LineaVenta:${carrito}">
+                                                <td th:text="${LineaVenta.producto.descripcion}" class="fw-bold">
+                                                <td th:text=" '$'+${LineaVenta.precioActual} "></td>
+                                                <td th:text="${LineaVenta.cantidad}"></td>
+                                                <td th:text=" '$'+${LineaVenta.calcularSubtotal}" class="money"></td>
+                                                <td><a th:href="@{/delete/carrito/{id}   (id=${LineaVenta.producto.id}) }"
+                                                        class="btn btn-danger">Quitar</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <ul class="list-group">
+                                <a th:href="@{/home}" class="btn btn-success">Agregar Productos</a>
+                            </ul>
+                        </div>                         
+
+                        <div class="col-lg-3">
+                            <h2 class="card-title">SUBTOTAL</h2>
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <h5 th:text=" '$'+ ${venta.total}"></h5>
+                                </li>
+                                <a th:href="@{/resumen}" class="btn btn-dark">Continuar Compra</a>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!--bootstrap 5.0.2 JS CDN-->
+    <script th:fragment="js"></script>
+</body>
+
+</html>
