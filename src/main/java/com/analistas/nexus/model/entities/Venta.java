@@ -50,6 +50,10 @@ public class Venta {
     @JoinColumn(name = "id_venta")
     private List<LineaVenta> lineas;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+
     public Venta() {
         activo = true;
         lineas = new ArrayList<>();
@@ -143,4 +147,12 @@ public class Venta {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+
+    public Cliente getCliente() {
+        return cliente;
+    }   
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }

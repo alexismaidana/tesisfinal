@@ -7,8 +7,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.analistas.nexus.model.entities.Usuario;
 import com.analistas.nexus.model.entities.Venta;
 import com.analistas.nexus.model.repository.IVentaRepositoy;
+import com.analistas.nexus.model.repository.UsuarioRepository;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -18,6 +21,9 @@ public class IVentaServiceImpl implements IVentaService {
 
     @Autowired
     IVentaRepositoy ventaRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepo;
 
     @Override
     @Transactional
@@ -66,4 +72,16 @@ public class IVentaServiceImpl implements IVentaService {
         throw new UnsupportedOperationException("Unimplemented method 'buscarSoloHabilitados'");
     }
 
+     @Override
+    @Transactional
+    public Usuario buscarCajero(String nombre) {
+
+        return usuarioRepo.findByNombre(nombre);
+    }
+
+    @Override
+    public List<Venta> findByUsuario(Usuario usuario) {
+
+        return ventaRepository.findByUsuario(usuario);
+    }
 }

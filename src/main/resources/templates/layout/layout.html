@@ -70,6 +70,16 @@
                     <li class="nav-item"><a class="nav-link link-light" href="#">Productos</a></li-->
                     <li class="nav-item"><a class="nav-link link-light" th:href="@{/conocenos}">Conocenos</a></li>
                     <li class="nav-item"><a class="nav-link link-light" th:href="@{/contacto}">Contactanos</a></li>
+                   
+                    <!--Menu Cliente Admin Logeado-->
+                    <th:block sec:authorize="hasAnyRole('CLIENTE') or hasRole('ADMIN')">
+                        <li class="nav-item">
+                        <li class="nav-item"><a class="nav-link link-light" th:href="@{/getCarrito}">Carrito</a></li>
+                        <!--<i class='bx bxs-truck'></i>-->
+
+                        <li class="nav-item"><a class="nav-link link-light" th:href="@{/getCompras}">Mis Compras</a></li>
+                        <!--<i class='bx bxs-truck'></i>-->
+                    </th:block>
                 </ul>
 
                 <ul class="navbar-nav ms-auto">
