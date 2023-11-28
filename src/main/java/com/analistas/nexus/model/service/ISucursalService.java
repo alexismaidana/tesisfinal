@@ -13,7 +13,5 @@ public interface ISucursalService {
     public List<Sucursal> buscarPor(String criterio);
 
     public Sucursal buscarPorId(Long id);
-
-   
     
 }

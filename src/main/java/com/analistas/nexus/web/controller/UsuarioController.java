@@ -47,7 +47,6 @@ public class UsuarioController {
     @Autowired
     ISucursalService sucursalService;
 
-
     @Autowired
     private JavaMailSender mailSender;
 
@@ -158,10 +157,10 @@ public class UsuarioController {
         mailMessage.setTo(usuario.getEmail());
         mailMessage.setSubject("Usuario Generado - Nexus Informatica tu conección con la tecnologia");
         String messageText = "Al Señor " + usuario.getNombre() + "\n\n"
-                + "Nos comunicamos desde la Admisnitración de Nexus Informatica, a fin de informarle que se ha generado un usuario en el sistema de Admisión y Cupo del Servicio Penitenciario de la Provincia del Chaco. Para ingresar al sistema, siga estos pasos:\n\n"
+                + "Nos comunicamos desde la Admisnitración de Nexus Informatica, a fin de informarle que se ha generado un usuario en el sistema en el cual tendrá beneficios y descuentos exclusivos. Para ingresar al sistema, siga estos pasos:\n\n"
                 + "1. Ingrese al siguiente enlace que lo llevará al Sistema de Admisión y Cupo: [nexusInformatica.com.ar/login]\n"
-                + "2. En el campo de usuario, ingrese su Nombre y Apellido, todo en minúsculas y sin espacios.\n"
-                + "3. La contraseña por defecto es su Número de Documento sin puntos ni espacios.\n\n"
+                + "2. En el campo de usuario, ingrese su USUARIO generado, todo en minúsculas y sin espacios.\n"
+                + "3. La contraseña por es la que eligio en nuestra web, sin puntos ni espacios.\n\n"
                 + "Saludos cordiales,\n"
                 + "Nexus Informatica.";
         mailMessage.setText(messageText);

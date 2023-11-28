@@ -31,6 +31,12 @@
                                 <small class="form-label text-danger" th:errors="*{clave}"></small>
                             </div>
                             <div class="form">
+                                <label for="email" class="form-label">Email</label>
+                                <input id="email" type="text" class="form-control" th:field="*{email}"
+                                    th:errorClass="'form-control alert-warning'" />
+                                <small class="form-label text-danger" th:errors="*{email}"></small>
+                            </div>
+                            <div class="form">
                                 <label for="permiso" class="form-label">Permiso</label>
                                 <select name="permiso" id="permiso" class="form-select">
                                     <option th:each="p : ${permisos}" th:value="${p.id}" th:text="${p.nombre}"></option>

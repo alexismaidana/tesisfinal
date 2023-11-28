@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${titulo}"></title>
+</head>
+
+<body>
+    <div layout:fragment="contenido">
+        <div th:if="${detalles != null}" class="container border rounded shadow p-3 bg-light">
+        <div class="row">
+            <div class="col-1">
+                <a th:href="@{/home}" class="btn btn-secondary btn-acciones-principales" data-bs-toggle="tooltip"
+                    data-bs-placement="right" title="Comprar">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </div>
+            <div class="col-10 text-center text-uppercase">
+                <h3 class="text-center">Detalle de Venta</h3>
+            </div>
+        </div>
+        <!--<div class="row mt-2">
+                <div class="col">
+                    <div>
+                        <p class="d-inline fw-bold">Número de venta: </p>
+                        <span th:text="${detalles.id}"></span>
+                    </div>
+                    <div>
+                        <p class="d-inline fw-bold">Fecha y Hora: </p>
+                        <span th:text="${#temporals.format(venta.fechaHora, 'dd/MM/yyyy - HH:mm')}"></span>
+                    </div>
+                    <div>
+                        <p class="d-inline fw-bold">Usuario: </p>
+                        <span th:if="${venta.usuario != null}" th:text="${venta.getUsuario.getNombre}"></span>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="fw-bold fs-3 text-end">
+                        Total:
+                        <span th:text="${LineaVenta.calcularTotal}" class="badge bg-success money"></span>
+                    </div>
+                </div>
+            </div>-->
+        <div class="row mt-2">
+            <div class="col">
+                <h5 class="text-secondary">Items</h5>
+                <div class="table-container detalleVenta overflow-auto border rounded">
+                    <table class="table table-hover caption-top">
+                        <thead class="bg-light">
+                            <tr class="text-uppercase">
+                                <th scope="col">codigo</th>
+                                <th scope="col">producto</th>
+                                <th scope="col">cantidad</th>
+                                <th scope="col">precio</th>
+                                <th scope="col">subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="LineaVenta:${detalles}">
+                                <td th:text="${LineaVenta.producto.CodigoBarras}" class="fw-bold"></td>
+                                <td th:text="${LineaVenta.producto.descripcion}"></td>
+                                <td th:text="${LineaVenta.cantidad}"></td>
+                                <td th:text="${LineaVenta.PrecioActual}" class="money"></td>
+                                <td th:text="${LineaVenta.calcularSubtotal}" class="money"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!--<div class="venta-not-available" th:unless="${venta != null}">
+            <p>La venta no está disponible.</p>
+        </div>-->
+    </div>
+    <!--bootstrap 5.0.2 JS CDN-->
+    <script th:fragment="js"></script>
+</body>
+
+</html>

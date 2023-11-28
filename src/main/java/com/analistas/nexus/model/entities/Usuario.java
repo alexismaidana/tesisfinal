@@ -24,9 +24,8 @@ public class Usuario  {
     private Long id;
 
     @Size(max = 30, min = 5)
-    //@NotEmpty(message = "El nombre de ususario es requerido...")   
+    //@NotEmpty(message = "El nombre de usuario es requerido...")   
     private String nombre;
-
     
     @Size(max = 70, min = 6, message = "La contraseña debe contener al menos 6 caracteres.")
     private String clave;
@@ -36,7 +35,6 @@ public class Usuario  {
 
     @Column(name = "activo", columnDefinition = "boolean default 1")
     private Boolean activo;
-
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_permiso", referencedColumnName = "id")
@@ -93,7 +91,6 @@ public class Usuario  {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-
    
     public String getEmail() {
         return email;
@@ -106,9 +103,7 @@ public class Usuario  {
     public void setEmail(String email) {
         this.email = email;
     }
-
      
-
     public Sucursal getSucursalAsignada() {
         return sucursalAsignada;
     }
