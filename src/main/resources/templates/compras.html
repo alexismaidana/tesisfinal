@@ -1,89 +1,70 @@
 <!DOCTYPE html>
-<html
-  lang="es"
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layout/layout}"
->
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
 
-    <title th:text="${titulo}"></title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <body>
-    <div layout:fragment="contenido" class="mt-4 m-4">
-      <div id="top-panel" class="d-flex justify-content-between">
-        <form id="search-form" action="">
-          <h4>Buscador</h4>
-          <div id="search-bar" class="input-group">
-            <input
-              class="form-control"
-              type="search"
-              placeholder="¿Qué estás buscando?"
-            />
-            <button type="submit" class="btn btn-secondary btn-acciones-principales">
-              Buscar
-            </button>
-          </div>
-        </form>
-        <div class="me-5">
-          <h4>Acciones</h4>
-          <a
-            th:href="@{/home}"
-            class="btn btn-secondary btn-acciones-principales"
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"  
-            title="Nueva Compra"
-          >
-            <i class="bi bi-plus-circle fs-5"></i>
-          </a>
+  <title th:text="${titulo}"></title>
+</head>
+
+<body>
+  <div layout:fragment="contenido" class="mt-4 m-4">
+    <div id="top-panel" class="d-flex justify-content-between">
+      <form id="search-form" action="">
+        <h4>Buscador</h4>
+        <div id="search-bar" class="input-group">
+          <input class="form-control" type="search" placeholder="¿Qué estás buscando?" />
+          <button type="submit" class="btn btn-secondary btn-acciones-principales">
+            Buscar
+          </button>
         </div>
-      </div>
-
-      <h5 class="text-secondary">Nexus: "Mis Compras"</h5>
-      <div
-        id="tablaProveedores"
-        class="table-container overflow-auto border rounded shadow"
-      >
-        <table class="table table-hover caption-top shadow p-3 mb-5 bg-white rounded">
-          <thead class="bg-light">
-            <tr class="text-uppercase">
-              <th scope="col">Accion</th>
-              <th scope="col"># Venta</th>
-              <th scope="col">Usuario</th>
-              <th scope="col">Fecha y Hora</th>
-              <th scope="col">Items comprados</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="Venta:${compras}">
-              <td>
-                <a <a sec:authorize="${hasRole('ADMIN') or hasRole('CLIENTE')}"
-                th:href="@{/getDetalle/{id} (id=${Venta.id}) }"
-                  class="btn btn-sm btn-warning btn-accion"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="bottom"
-                  title="Ver detalle"
-                >
-                  <i class="bi bi-eye-fill"></i>
-                </a>                
-              </td>
-              <td th:text="${Venta.id}"></td>
-              <td th:text="${Venta.usuario?.nombre}"></td>
-              <td th:text='*{#temporals.format(Venta.fechaHora, "dd/MM/yyyy HH:mm")}'></td>
-              <td th:text="${Venta.calcularCantidad}"></td>
-              <td th:text="${Venta.calcularTotal}" class="money"></td>
-            </tr>
-          </tbody>
-        </table>
+      </form>
+      <div class="me-5">
+        <h4>Acciones</h4>
+        <a th:href="@{/home}" class="btn btn-secondary btn-acciones-principales" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Nueva Compra">
+          <i class="bi bi-plus-circle fs-5"></i>
+        </a>
       </div>
     </div>
 
-    <script th:fragment="js" th:src="@{/js/venta.js}"></script>
-  </body>
+    <h5 class="text-secondary">Nexus: "Mis Compras"</h5>
+    <div id="tablaProveedores" class="table-container overflow-auto border rounded shadow">
+      <table class="table table-hover caption-top shadow p-3 mb-5 bg-white rounded">
+        <thead class="bg-light">
+          <tr class="text-uppercase">
+            <th scope="col">Accion</th>
+            <th scope="col"># Venta</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Fecha y Hora</th>
+            <th scope="col">Items comprados</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="Venta:${compras}">
+            <td>
+              <a <a sec:authorize="${hasRole('ADMIN') or hasRole('CLIENTE')}"
+                th:href="@{/getDetalle/{id} (id=${Venta.id}) }" class="btn btn-sm btn-warning btn-accion"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver detalle">
+                <i class="bi bi-eye-fill"></i>
+              </a>
+            </td>
+            <td th:text="${Venta.id}"></td>
+            <td th:text="${Venta.usuario?.nombre}"></td>
+            <td th:text='*{#temporals.format(Venta.fechaHora, "dd/MM/yyyy HH:mm")}'></td>
+            <td th:text="${Venta.calcularCantidad}"></td>
+            <td th:text="${Venta.calcularTotal}" class="money"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script th:fragment="js" th:src="@{/js/venta.js}"></script>
+</body>
+
 </html>

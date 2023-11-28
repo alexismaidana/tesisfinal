@@ -56,7 +56,7 @@
 
             <!-- IMAGENES PRODUCTO -->
             <div class="row">
-                <div class="col-6">
+                <div class="col-4">
                     <center><img class="img-fluid rounded" th:src="@{${producto.linkimagen}}"></center>
                     <!--<div id="carouselExampleIndicators" class="carousel carousel-dark slide justify-content-center"
                         data-bs-ride="carousel">
@@ -99,7 +99,7 @@
                 </div>
 
                 <!-- DATOS PRINCIPALES -->
-                <div class="col-5 datos-producto">
+                <div class="col-8 datos-producto">
                     <h3>
                         <!--PROCESADOR SOCKET 1700 INTEL CORE I5 12400 4.4GHZ 6N 12H-->
                         <class="card-title" th:text="${producto.descripcion}"></class>
@@ -135,7 +135,7 @@
                                 <li class="list-group-item">
                                     <h4>
                                         Cantidad: <input type="number" id="cant" name="cant" autocomplete="off" min="1"
-                                            max="10" value="1">
+                                            max="20" value="1">
                                     </h4>
                                 </li>
                             </ul>
